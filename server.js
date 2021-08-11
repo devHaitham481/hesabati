@@ -25,7 +25,7 @@ db.connection.sync();
 
 // simple route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Login System'});
+  res.json({ message: 'Welcome to Tuxedo APP \n Restaurant Reservations that matter'});
 });
 
 // require("./routes/restaurant.routes")(app);
