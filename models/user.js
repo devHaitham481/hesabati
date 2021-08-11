@@ -1,7 +1,22 @@
 const crypto = require('crypto')
  
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
+  const User = sequelize.define("users", {
+     id: {
+     type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+    firstname: { 
+						type: Sequelize.STRING, 
+						notEmpty: true, 
+						notNull: true, 
+		}, 
+    lastname: { 
+						type: Sequelize.STRING, 
+						notEmpty: true, 
+						notNull: true
+		},
     email: {
       type: Sequelize.STRING,
       set: function (val) {
@@ -11,14 +26,6 @@ module.exports = (sequelize, Sequelize) => {
       notNull: false,
       unique: true
     },
-    username: { 
-						type: Sequelize.STRING, 
-						set: function(val) { 
-										this.setDataValue('username', val.toLowerCase());
-						},
-						notEmpty: true, 
-						notNull: false, 
-				},
 
     phonenumber: { 
 	    type: Sequelize.BIGINT(12), 
@@ -27,13 +34,21 @@ module.exports = (sequelize, Sequelize) => {
 	    notEmpty: true
 
     },
-
+    address: { 
+						type: Sequelize.STRING
+		}, 
+		gender: { 
+			type: Sequelize.SMALLINT, 
+			notNull: true, 
+  		notEmpty: true
+  	},
     password: {
       type: Sequelize.STRING,
       get() {
         return () => this.getDataValue('password')
       }
     }, 
+    
 
     salt: {
       type: Sequelize.STRING,

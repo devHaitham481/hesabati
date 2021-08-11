@@ -19,6 +19,23 @@ const db = {};
 db.Sequelize = Sequelize;
 db.connection = sequelize;
 
-db.users = require('./user.model.js')(db.connection, db.Sequelize)
-
+db.User = require('./user.js')(db.connection, db.Sequelize)
+db.RestaurantBranch = require('./restaurant_branches.js')(db.connection, db.Sequelize);
+db.Customer = require('./customer.js')(db.connection, db.Sequelize);
+db.Restaurant = require('./restaurant.js')(db.connection, db.Sequelize);
+db.Reservation = require('./reservation.js')(db.connection, db.Sequelize);
+db.ReservationGuest = require('./reservation_guests.js')(db.connection, db.Sequelize);
+db.Order = require('./order.js')(db.connection, db.Sequelize);
+db.Menu = require('./menu.js')(db.connection, db.Sequelize);
+db.DishType = require('./dish_type.js')(db.connection, db.Sequelize);
+db.DishClassification = require('./dish_classification.js')(db.connection, db.Sequelize);
+db.Country = require('./country')(db.connection, db.Sequelize);
+db.City = require('./city.js')(db.connection, db.Sequelize);
+db.District = require('./district.js')(db.connection, db.Sequelize);
+db.RestaurantType = require('./restaurant_type.js')(db.connection, db.Sequelize);
+db.MembershipType = require('./membership_type')(db.connection, db.Sequelize);
+db.Feedback = require('./feedback.js')(db.connection, db.Sequelize);
+db.Table = require('./table.js')(db.connection, db.Sequelize);
+db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
+db.Notification = require('./notification.js')(db.connection, db.Sequelize);
 module.exports = db;

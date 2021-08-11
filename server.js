@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const db = require("./models");
 const {logger, auth } = require('./helpers/authHelper');
-
+const repl = require('repl');
 const app = express();
 
 var corsOptions = {
@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Login System'});
 });
 
+// require("./routes/restaurant.routes")(app);
 require("./routes/user.routes")(app);
 
 // set port, listen for requests

@@ -20,7 +20,8 @@ exports.signup = (req, res) => {
 				username: req.body.username,
         phonenumber: req.body.phonenumber,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password, 
+				gender: req.body.gender
     }
 
     User.create(newUser)
