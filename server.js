@@ -28,9 +28,9 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Tuxedo APP \n Restaurant Reservations that matter'});
 });
 
-// require("./routes/restaurant.routes")(app);
+require("./routes/restaurant.routes")(app);
 require("./routes/user.routes")(app);
-
+require("./routes/customer.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

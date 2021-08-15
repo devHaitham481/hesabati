@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.users;
+const User = db.User;
 const Op = db.Sequelize.Op;
 const where = db.Sequelize.where;
 
@@ -7,7 +7,7 @@ async function findUserByPhoneNumber(phoneNumber) {
 	try { 
 		users = await User.findAll({ 
 			where: {
-				phonenumber: phoneNumber
+				phoneNumber: phoneNumber
 			}
 		})
 		return (users instanceof Array) ? users[0] :null; 

@@ -7,12 +7,12 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-    firstname: { 
+    firstName: { 
 						type: Sequelize.STRING, 
 						notEmpty: true, 
 						notNull: true, 
 		}, 
-    lastname: { 
+    lastName: { 
 						type: Sequelize.STRING, 
 						notEmpty: true, 
 						notNull: true
@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
       unique: true
     },
 
-    phonenumber: { 
+    phoneNumber: { 
 	    type: Sequelize.BIGINT(12), 
 	    notNull: true, 
 	    unique: true, 

@@ -31,5 +31,5 @@ const authenticateJWT = (req, res, next) => {
 
 module.exports = {
     logger: logger,
-    auth: authenticateJWT
+    auth: authenticateJWT,
 }

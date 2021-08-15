@@ -1,0 +1,9 @@
+nodejs design pattern to follow while developing 
+
+
+* main controller functions like login and signup goes into the controller file. 
+* helper controller functions like findUserByUsername...etc goes into helpers folder. 
+* controller gets imported into routes folder. No need to import helpers too since helpers are already imported into controllers 
+* routes file gets imported into server.js. no need to import controllers or anything else
+* models gets imported into controllers 
+* models also gets imported into server.js

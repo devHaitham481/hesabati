@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.users;
+const User = db.User;
 const Op = db.Sequelize.Op;
 const where = db.Sequelize.where;
 const jwt = require('jsonwebtoken');
@@ -7,8 +7,8 @@ const { secret } = require('../config/jwt.config');
 const { findUserByEamil, findUserByPhoneNumber, findUserByUsername } = require('../helpers/userHelper');
 
 exports.signup = (req, res) => {
-    console.log(req.body)
-    if (!req.body.phonenumber, !req.body.email, !req.body.password) {
+    console.log('user')
+    if (!req.body.phoneNumber, !req.body.email, !req.body.password) {
         res.status(400).send({
             message: 'Please provide all the fields.'
         });
@@ -17,11 +17,11 @@ exports.signup = (req, res) => {
 	
     // Create the User Record
     const newUser = {
-				username: req.body.username,
-        phonenumber: req.body.phonenumber,
+		username: req.body.username,
+        phoneNumber: req.body.phoneNumber,
         email: req.body.email,
         password: req.body.password, 
-				gender: req.body.gender
+		gender: req.body.gender
     }
 
     User.create(newUser)
@@ -41,14 +41,14 @@ exports.signup = (req, res) => {
 exports.login = async (req, res) => {
     console.log(req.body)
 
-    if ((!req.body.phonenumber && !req.body.email) || (!req.body.password)) {
+    if ((!req.body.phoneNumber || req.body.email) && (!req.body.password)) {
         res.status(400).send({
             message: 'Please provide username/email and password.'
         });
     }
     user = null;
-    if (req.body.phonenumber) {
-        user = await findUserByPhoneNumber(req.body.phonenumber);
+    if (req.body.phoneNumber) {
+        user = await findUserByPhoneNumber(req.body.phoneNumber);
     } else if (req.body.email) {
         user = await findUserByEamil(req.body.email);
     }
@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
             res.status(200).send({
                 message: "Login Successful",
                 token: jwt.sign({
-                    phonenumber: user.phonenumber,
+                    phoneNumber: user.phoneNumber,
                     email: user.email
                 }, secret)
             })
@@ -108,7 +108,7 @@ exports.changepassword = async (req, res) => {
     }
 }
 
-exports.verifypassword = async (req, res) => {
+exports.verifyPassword = async (req, res) => {
     console.log(req.body)
 
     if (!req.body.password) {
@@ -116,7 +116,7 @@ exports.verifypassword = async (req, res) => {
             message: 'Please provide your password to re-authenticate.'
         });
     }
-    user = await findUserByUsername(req.user.username);
+   user = await findUserByUsername(req.user.username);
     if (user == null || !(user instanceof User)) {
         res.status(403).send({
             message: "Invalid Credentials!"
@@ -132,6 +132,6 @@ exports.verifypassword = async (req, res) => {
             });
         }
     }
-}
+};
 
 module.exports = exports;
