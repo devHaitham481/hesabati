@@ -114,8 +114,8 @@ const destroy = async (req, res) => {
                 message: 'Restaurant Not Found'
             });
         }
-        return restaurant.destroy()                   // Message doesn't get printed on 204 status 
-        .then((restaurant) => res.status(204).send({ 
+        restaurant.destroy()                   // Message doesn't get printed on 204 status 
+        .then(() => res.status(204).send({ 
             message: "Restaurant Deleted"
         }))
         .catch((error) => res.status(400).send(error));
