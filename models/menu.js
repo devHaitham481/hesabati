@@ -18,16 +18,16 @@ module.exports = (sequelize, Sequelize) => {
         isDeleted: {
             type: Sequelize.BOOLEAN
         },
-        // Foreign Keys
-        branchId: {
-            type: Sequelize.INTEGER
-        },
-        dishTypeId: {
-            type: Sequelize.INTEGER
-        },
-        dishClassificationId: {
-            type: Sequelize.INTEGER
-        }
+        // // Foreign Keys
+        // branchId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // dishTypeId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // dishClassificationId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
     return Menu;
 };

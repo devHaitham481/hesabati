@@ -8,6 +8,35 @@ const { findCustomerByEmail, findCustomerByPhoneNumber, findCustomerByUsername }
 const { verifyPassword } = require("../helpers/authHelper");
 
 
+exports.updateProfile = async(req,res) => {
+    await Customer.update(
+        {
+            firstName:req.body.firstName,
+            lastName:req.body.lastName,
+            phoneNumber:req.body.phoneNumber,
+            email:req.body.email
+        },
+        {
+            where:{
+            id:req.params.id
+            }
+        }
+    ).then(res.status(200).send({
+        message:"profile updated",
+        data:{
+            firstName,
+            lastName,
+            phoneNumber,
+            email
+        }
+    })).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while uploading profile",
+            errObj: err
+        });
+    });
+}
+
 exports.signup = (req, res) => { 
     console.log(req.body) 
     if ((!req.body.phoneNumber || req.body.email) && !req.body.password) { 

@@ -11,6 +11,8 @@ module.exports = app => {
     router.post("/changepassword", auth, customers.changePassword);
     router.post("/verifypassword", auth, customers.verifyPassword);
 
+    router.post("/profile/:id", customers.updateProfile);
+
     app.use('/customer', router);
 
     // app.post('/register', async (req, res) => {
