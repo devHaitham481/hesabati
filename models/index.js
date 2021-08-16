@@ -39,4 +39,10 @@ db.Restaurant = require('./restaurant.js')(db.connection, db.Sequelize);
 // db.Table = require('./table.js')(db.connection, db.Sequelize);
 // db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
 // db.Notification = require('./notification.js')(db.connection, db.Sequelize);
+
+
+db.Restaurant.belongsTo(db.User);
+//db.Restaurant.belongsTo(db.User, { foreignKey: { name: ownerId, allowNull: false}});
+//db.User.belongsTo(db.Restaurant, { foreignKey: { name: ownerId, allowNull: false }});
+
 module.exports = db;

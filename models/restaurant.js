@@ -11,9 +11,6 @@ module.exports = (sequelize, Sequelize) => {
       location: {
         type: Sequelize.STRING,
       },
-      ownerId: {
-        type: Sequelize.INTEGER
-      },
       isDeleted: {
         type: Sequelize.BOOLEAN
       }

@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models")
 const Customer = db.Customer;
 const Op = db.Sequelize.Op; 
 const where = db.Sequelize.where; 

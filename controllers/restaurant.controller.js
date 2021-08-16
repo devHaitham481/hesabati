@@ -6,18 +6,17 @@ const User = db.User;
 
 const findAll = async (req, res) => { 
     console.log(req.body);
-     Restaurant.findAll(
-    //     {
-    //     include: [{
-    //         model: User,
-    //        // as: 'users'
-    //     },
+   await Restaurant.findAll(
+        {
+        include: [{
+            model: User,
+        },
         
-    // ], 
-    // order: [
-    //     ['createdAt', 'DESC'],
-    //     [{ model: User}, 'createdAt', 'DESC'],
-    // ], }
+    ], 
+    order: [
+        ['createdAt', 'DESC'],
+        [{ model: User}, 'createdAt', 'DESC'],
+    ] }
     )
     .then((restaurants) => {
         return res.status(200).send({
@@ -33,13 +32,13 @@ const findOne = async (req, res) => {
     console.log(req.body);
     return Restaurant 
     .findByPk(req.params.id
-        // , 
-        // {
-        // include: [{
-        //     model: User,
-        //     as: 'user'
-        //  }], }
-        // )
+        , 
+        {
+        include: [{
+            model: User,
+            as: 'user'
+         }], }
+        )
     .then((restaurant) => {
         if(!restaurant) { 
             return res.status(404).send({
@@ -51,7 +50,7 @@ const findOne = async (req, res) => {
             data: restaurant
         });
     })
-    .catch((error) => res.status(400).send(error)));
+    .catch((error) => res.status(400).send(error));
 };
 
 const create = async (req, res) => { 
@@ -78,12 +77,12 @@ const update = async (req, res) => {
     console.log(req.body);
     return Restaurant
     .findByPk(req.params.id
-    //     , {
-    //     include: [{
-    //         model: User,
-    //         as: 'user'
-    //     }],
-    // }
+        , {
+        include: [{
+            model: User,
+            as: 'user'
+        }],
+    }
     )
     .then(restaurant => {
         if(!restaurant) {
