@@ -7,6 +7,29 @@ const { secret } = require('../config/jwt.config');
 const { findCustomerByEmail, findCustomerByPhoneNumber, findCustomerByUsername } = require('../helpers/customerHelper');
 const { verifyPassword } = require("../helpers/authHelper");
 
+//find profile without events
+exports.findProfile = async(req,res) => {
+    await Customer.findOne({
+            where:{
+            id:req.params.id
+            }
+        }
+    ).then((user)=>{
+        res.status(200).send({
+        message:"profile loaded successfully",
+        data:{
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+        }
+    })}).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while loading profile",
+            errObj: err
+        });
+    });
+}
+
 
 exports.updateProfile = async(req,res) => {
     await Customer.update(
@@ -21,15 +44,17 @@ exports.updateProfile = async(req,res) => {
             id:req.params.id
             }
         }
-    ).then(res.status(200).send({
-        message:"profile updated",
-        data:{
-            firstName,
-            lastName,
-            phoneNumber,
-            email
-        }
-    })).catch(err => {
+    ).then(
+        res.status(200).send({
+            message:"profile updated successfully",
+            data:{
+                firstName:req.body.firstName,
+                lastName:req.body.lastName,
+                phoneNumber:req.body.phoneNumber,
+                email:req.body.email
+            }
+        })
+    ).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while uploading profile",
             errObj: err
@@ -47,6 +72,8 @@ exports.signup = (req, res) => {
     }
 
     const newCustomer = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email, 
         password: req.body.password, 

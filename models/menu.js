@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         dishName: {
-            type: Sequelize.INTEGER
+            type: Sequelize.TEXT
         },
         dishDescription: {
             type: Sequelize.TEXT

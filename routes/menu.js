@@ -6,5 +6,5 @@ module.exports = (app) => {
 
     router.get("/:id",menues.findOne);
 
-    app.use("/menu",router);
+    app.use("/restaurant_branches/menu",router);
 }

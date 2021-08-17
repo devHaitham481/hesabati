@@ -1,8 +1,8 @@
 module.exports = {
     HOST: "localhost",
     USER: "postgres",
-    PASSWORD: "Dafa.sa@123",
-    DB: "tuxedo_test_db",
+    PASSWORD: "123",
+    DB: "Tuxedo_db",
     PORT: '5432',
     Dialect: "postgres",
     pool: {

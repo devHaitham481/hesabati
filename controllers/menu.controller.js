@@ -3,20 +3,21 @@ const Menu = db.Menu;
 const DishType = db.DishType;
 const DishClassification = db.DishClassification;
 
-const findOne = async(req,res)=>{
+const findOne = async (req,res) => {
     const id = req.params.id;
     await Menu.findAll({
         where:{
-            branchId:id
-        },
-        include:[
+            restaurantBranchId:id
+        }
+        ,
+        include: [
             {
                 model:DishType,
-                as:"dishType"
+                //as:"dishType"
             },
             {
                 model:DishClassification,
-                as:"dishClassification"
+                //as:"dishClassification"
             }
         ]
     })
@@ -25,7 +26,7 @@ const findOne = async(req,res)=>{
         message:"menu returned successfully",
         data: menu
     })})
-    .catch((error) => { res.status(400).send(error)});
+    .catch((error) => { res.status(500).send(error)});
 };
 
 

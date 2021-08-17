@@ -39,7 +39,15 @@ db.DishClassification = require('./dish_classification.js')(db.connection, db.Se
 // db.Table = require('./table.js')(db.connection, db.Sequelize);
 // db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
 // db.Notification = require('./notification.js')(db.connection, db.Sequelize);
-db.Menu.hasMany(db.DishType);
-db.Menu.hasMany(db.DishClassification);
+db.Menu.belongsTo(db.DishType);
+db.Menu.belongsTo(db.DishClassification);
+db.DishClassification.hasOne(db.Menu);
+db.DishType.hasOne(db.Menu);
+
+// db.DishClassification.hasMany(db.Menu);
+// // db.Menu.belongsTo(db.DishClassification);
+// // db.Menu.belongsTo(db.DishType);
+// db.DishType.hasMany(db.Menu);
 db.Menu.belongsTo(db.RestaurantBranch);
+db.RestaurantBranch.hasMany(db.Menu);
 module.exports = db;

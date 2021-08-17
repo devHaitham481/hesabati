@@ -11,7 +11,8 @@ module.exports = app => {
     router.post("/changepassword", auth, customers.changePassword);
     router.post("/verifypassword", auth, customers.verifyPassword);
 
-    router.post("/profile/:id", customers.updateProfile);
+    router.put("/profile/:id", customers.updateProfile);
+    router.get("/profile/:id", customers.findProfile);
 
     app.use('/customer', router);
 
