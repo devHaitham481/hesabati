@@ -16,19 +16,19 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         status: {
-            type: Sequelize.ARRAY(Sequelize.TEXT),
-            isIn: [['available', 'reserved', 'Waiting']]
+            type: Sequelize.TEXT,
+        },
+        notes: {
+            type: Sequelize.TEXT
         },
         isDeleted: {
             type: Sequelize.BOOLEAN
-        },
-        // Foreign Keys
-        branchId: {
-            type: Sequelize.INTEGER
-        },
-        customerId: {
-            type: Sequelize.INTEGER
         }
+        // Foreign Keys
+        //tableId
+        //restaurantBranchId
+        //customerId
+
     });
     return Reservation;
 };

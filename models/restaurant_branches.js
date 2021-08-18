@@ -44,7 +44,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(45)
         }, 
         contact: { 
-            type: Sequelize.STRING(15)
+            type: Sequelize.TEXT
         },
         /*locationZoom: { 
             type: Sequelize.INTEGER
@@ -56,18 +56,14 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         // Foreign Keys
-        restaurantId: { 
-            type: Sequelize.INTEGER
-        },
-        managerId: { 
-            type: Sequelize.INTEGER
-        },
-        cityId: { 
-            type: Sequelize.INTEGER
-        },
-        districtId: { 
-            type: Sequelize.INTEGER
-        }
+        // restaurantId: { 
+        //     type: Sequelize.INTEGER
+        // },
+        // districtId: {
+    //         type: Sequelize.INTEGER
+    // }
+        
+     //   }
         
 
     });

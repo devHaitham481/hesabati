@@ -14,7 +14,7 @@ module.exports = app => {
     router.delete("/restaurants/:id", restaurants.destroy);
     //router.delete("/restaurants", restaurants.deleteAll);
 
-    app.use('/', router)
+    app.use('/', router);
     
     
 };

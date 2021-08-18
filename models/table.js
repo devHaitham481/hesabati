@@ -29,15 +29,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         is_open: {
             type: Sequelize.INTEGER
-        },
-        // Foreign Keys
-        restaurantId: {
-            type: Sequelize.INTEGER
-        },
-        branchId: {
-            type: Sequelize.INTEGER
         }
-
+        // Foreign Keys
+        //restaurantBranchId 
+        
     });
 
     return Table;

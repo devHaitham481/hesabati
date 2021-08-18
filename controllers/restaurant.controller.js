@@ -9,7 +9,7 @@ const findAll = async (req, res) => {
    await Restaurant.findAll(
         {
         include: [{
-            model: User,
+            model: User
         },
         
     ], 
@@ -36,7 +36,7 @@ const findOne = async (req, res) => {
         {
         include: [{
             model: User,
-            as: 'user'
+            //as: 'user'
          }], }
         )
     .then((restaurant) => {
@@ -64,11 +64,11 @@ const create = async (req, res) => {
     const newRestaurant = { 
         name: req.body.restaurantName,
         location: req.body.restaurantLocation
-    };
+    };  
     Restaurant.create(newRestaurant)
     .then((restaurant) => res.status(201).send({
         message: "Restaurant Created", 
-        data: newRestaurant
+        data: restaurant
     }))
     .catch((error) => res.status(400).send(error));
 };
@@ -80,7 +80,7 @@ const update = async (req, res) => {
         , {
         include: [{
             model: User,
-            as: 'user'
+            //as: 'user'
         }],
     }
     )

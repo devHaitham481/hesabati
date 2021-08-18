@@ -13,11 +13,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         isDeleted: {
             type: Sequelize.BOOLEAN
-        },
-        // Foreign Keys
-        cityId: {
-            type: Sequelize.INTEGER
         }
+        // Foreign Keys
+        // cityId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
 
     return District;

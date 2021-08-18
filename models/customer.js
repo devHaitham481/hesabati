@@ -59,10 +59,10 @@ module.exports = (sequelize, Sequelize) => {
     status: {
       type: Sequelize.SMALLINT
     },
-    //Foreign Keys
-    branchId: {
-      type: Sequelize.INTEGER
-    },
+    // Foreign Keys
+    // branchId: {
+    //   type: Sequelize.INTEGER
+    // },
     salt: {
       type: Sequelize.STRING, 
       notEmpty: true, 

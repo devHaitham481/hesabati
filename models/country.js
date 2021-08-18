@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         // Foreign Keys
         isDeleted: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BOOLEAN
         }
     });
 
