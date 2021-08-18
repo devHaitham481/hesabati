@@ -4,20 +4,18 @@ module.exports = app => {
     //middlewares
 
     var router = require("express").Router();
-
+    // Create
     router.post("/signup", customers.signup);
     router.post("/login", customers.login);
-
+    //Read
     router.post("/changepassword", auth, customers.changePassword);
     router.post("/verifypassword", auth, customers.verifyPassword);
-
-    router.put("/profile/:id", customers.updateProfile);
-    router.get("/profile/:id", customers.findProfile);
+    //Update
+    router.put("/profile",auth, customers.updateProfile);
+    router.get("/profile",auth, customers.findProfile);
+    //Delete
 
     app.use('/customer', router);
 
-    // app.post('/register', async (req, res) => {
-    //     const user = await User.create(req.body);
-    //     res.json(user);
-    //   });
+
 };

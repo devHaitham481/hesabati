@@ -4,23 +4,19 @@ const Op = db.Sequelize.Op;
 const where = db.Sequelize.where; 
 const jwt = require('jsonwebtoken');
 const { secret } = require('../config/jwt.config');
-const { findCustomerByEmail, findCustomerByPhoneNumber, findCustomerByUsername } = require('../helpers/customerHelper');
+const { findCustomerByEmail, findCustomerByPhoneNumber, findCustomerByUsername,findCustomerByToken } = require('../helpers/customerHelper');
 const { verifyPassword } = require("../helpers/authHelper");
 
 //find profile without events
 exports.findProfile = async(req,res) => {
-    await Customer.findOne({
-            where:{
-            id:req.params.id
-            }
-        }
-    ).then((user)=>{
+    const customer = await findCustomerByToken(req.user);
+    await Customer.findByPk(customer.id).then((customer)=>{
         res.status(200).send({
         message:"profile loaded successfully",
         data:{
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phoneNumber: user.phoneNumber,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            phoneNumber: customer.phoneNumber,
         }
     })}).catch(err => {
         res.status(500).send({
@@ -32,6 +28,7 @@ exports.findProfile = async(req,res) => {
 
 
 exports.updateProfile = async(req,res) => {
+    const customer = await findCustomerByToken(req.user);
     await Customer.update(
         {
             firstName:req.body.firstName,
@@ -41,7 +38,7 @@ exports.updateProfile = async(req,res) => {
         },
         {
             where:{
-            id:req.params.id
+            id:customer.id
             }
         }
     ).then(
@@ -51,7 +48,11 @@ exports.updateProfile = async(req,res) => {
                 firstName:req.body.firstName,
                 lastName:req.body.lastName,
                 phoneNumber:req.body.phoneNumber,
-                email:req.body.email
+                email:req.body.email,
+                token: jwt.sign({
+                    phoneNumber: req.body.phoneNumber, 
+                    password: req.body.password
+                }, secret)
             }
         })
     ).catch(err => {
@@ -138,7 +139,7 @@ exports.changePassword = async (req, res) => {
         res.status(400).send({
             message: 'Please provide both old and new password.'
         });
-    } console.log("HELO");
+    } 
     customer = await findCustomerByPhoneNumber(req.body.phoneNumber); 
     if (customer == null || !(customer instanceof Customer)) {
         res.status(403).send({

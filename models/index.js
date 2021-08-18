@@ -41,8 +41,6 @@ db.DishClassification = require('./dish_classification.js')(db.connection, db.Se
 // db.Notification = require('./notification.js')(db.connection, db.Sequelize);
 db.Menu.belongsTo(db.DishType);
 db.Menu.belongsTo(db.DishClassification);
-db.DishClassification.hasOne(db.Menu);
-db.DishType.hasOne(db.Menu);
 
 // db.DishClassification.hasMany(db.Menu);
 // // db.Menu.belongsTo(db.DishClassification);
