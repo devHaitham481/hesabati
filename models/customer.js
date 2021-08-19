@@ -8,10 +8,17 @@ module.exports = (sequelize, Sequelize) => {
       autoIncrement: true, 
       allowNull: false
     },
-    firstName: { 
+    firstName_en: { 
       type: Sequelize.STRING
     },
-    lastName: {
+    firstName_ar: {
+      type: Sequelize.STRING
+    },
+
+    lastName_en: {
+      type: Sequelize.STRING
+    },
+    lastName_ar: {
       type: Sequelize.STRING
     },
     phoneNumber: {
@@ -35,14 +42,22 @@ module.exports = (sequelize, Sequelize) => {
     avatar: {
       type: Sequelize.STRING
     },
-    address: {
+    address_en: {
       type: Sequelize.STRING
     },
+    address_ar: {
+      type: Sequelize.STRING
+    },
+    countryCode: {
+      type: Sequelize.CHAR(25)
+    },
     registrationType: {
-      type: Sequelize.STRING,
-      isIn: [['facebook', 'twitter', 'apple', 'application', 'website']],
-      allowNull: true
-      
+      type: Sequelize.ENUM,
+      values: ['active', 'pending', 'deleted']
+    }, 
+    registrationSource: {
+      type: Sequelize.ENUM,
+      values: ['backend', 'ios', 'android']
     },
     latitude: {
       type: Sequelize.DOUBLE,

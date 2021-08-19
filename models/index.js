@@ -27,28 +27,52 @@ db.Restaurant = require('./restaurant.js')(db.connection, db.Sequelize);
 db.Reservation = require('./reservation.js')(db.connection, db.Sequelize);
 // db.ReservationGuest = require('./reservation_guests.js')(db.connection, db.Sequelize);
 db.Order = require('./order.js')(db.connection, db.Sequelize);
-// db.Menu = require('./menu.js')(db.connection, db.Sequelize);
+db.Menu = require('./menu.js')(db.connection, db.Sequelize);
 // db.DishType = require('./dish_type.js')(db.connection, db.Sequelize);
 // db.DishClassification = require('./dish_classification.js')(db.connection, db.Sequelize);
 db.Country = require('./country')(db.connection, db.Sequelize);
 db.City = require('./city.js')(db.connection, db.Sequelize);
 db.District = require('./district.js')(db.connection, db.Sequelize);
-// db.RestaurantType = require('./restaurant_type.js')(db.connection, db.Sequelize);
+db.RestaurantType = require('./restaurant_type.js')(db.connection, db.Sequelize);
 // db.MembershipType = require('./membership_type')(db.connection, db.Sequelize);
 // db.Feedback = require('./feedback.js')(db.connection, db.Sequelize);
 db.Table = require('./table.js')(db.connection, db.Sequelize);
 // db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
 // db.Notification = require('./notification.js')(db.connection, db.Sequelize);
-
-
+db.Category = require('./category.js')(db.connection, db.Sequelize);
+db.Permission = require('./permission.js')(db.connection, db.Sequelize);
 // User.getRestaurants(0)
 // User.belongsTo(Restaurant) // this puts a restaurantId in users
 // User.hasOne(Restaurant)  // this puts userId in Restaurants
+db.PermissionUser = require('./permission_user.js')(db.connection, db.Sequelize);
+db.Role = require('./role.js')(db.connection, db.Sequelize);
+db.PermissionRole = require('./permission_role.js')(db.connection, db.Sequelize);
+db.RestaurantPhoto = require('./restaurant_photo.js')(db.connection, db.Sequelize);
+db.TablePhoto = require('./table_photo.js')(db.connection, db.Sequelize); 
+db.RoleUser = require('./role_user.js')(db.connection, db.Sequelize);
 
 
+
+
+
+
+//Sequelize Associations
+db.RestaurantType.belongsTo(db.Restaurant);
+db.RestaurantPhoto.belongsTo(db.Restaurant);
+db.PermissionUser.belongsTo(db.Permission);
+db.PermissionUser.belongsTo(db.User);
+
+db.PermissionRole.belongsTo(db.Permission);
+db.PermissionRole.belongsTo(db.Role);
+
+db.RoleUser.belongsTo(db.User);
+db.RoleUser.belongsTo(db.Role);
+
+db.Restaurant.belongsTo(db.Category);
 //db.Restaurant.belongsTo(db.User);
 db.Reservation.belongsTo(db.Table);
 db.Table.hasMany(db.Reservation);
+db.TablePhoto.belongsTo(db.Table);
 // Restaurant Branch / Reservation
 db.Reservation.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Reservation);

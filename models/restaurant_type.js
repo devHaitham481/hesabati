@@ -11,11 +11,12 @@ module.exports = (sequelize, Sequelize) => {
             notEmpty: true,
             notNull: true
         },
+        photo: {
+            type: Sequelize.STRING
+        }
 
         // Foreign Keys
-        restaurantId: {
-            type: Sequelize.INTEGER
-        }
+        //restaurantId
     });
 
     return RestaurantType;

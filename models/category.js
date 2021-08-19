@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const City = sequelize.define('cities', {
+    const Category = sequelize.define('categories', {
         id: {
             type: Sequelize.INTEGER, 
             primaryKey: true,
@@ -13,21 +13,8 @@ module.exports = (sequelize, Sequelize) => {
         },
         name_ar: {
             type: Sequelize.STRING
-        }, 
-        code: {
-            type: Sequelize.STRING
-        },
-        status: {
-            type: Sequelize.SMALLINT
-        },
-        isDeleted: {
-            type: Sequelize.BOOLEAN
         }
-        // Foreign Keys
-        // countryId: {
-        //     type: Sequelize.INTEGER
-        // }
     });
 
-    return City;
+    return Category;
 };

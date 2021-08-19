@@ -5,11 +5,20 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true, 
             allowNull: false
-        },
-        name: {
+        }, 
+        name_en: {
             type: Sequelize.STRING,
             notEmpty: true,
             notNull: true
+        },
+        name_ar: {
+            type: Sequelize.STRING
+        },
+        tel: {
+            type: Sequelize.STRING
+        },
+        code: {
+            type: Sequelize.STRING
         },
         // Foreign Keys
         isDeleted: {

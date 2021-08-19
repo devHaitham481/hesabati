@@ -18,7 +18,10 @@ module.exports = (sequelize, Sequelize) => {
         status: {
             type: Sequelize.TEXT,
         },
-        notes: {
+        specialRequest: {
+            type: Sequelize.TEXT
+        },
+        occassion: {
             type: Sequelize.TEXT
         },
         isDeleted: {

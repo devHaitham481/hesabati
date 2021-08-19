@@ -6,17 +6,35 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true, 
             allowNull: false
         },
-        name: { 
+        name_en: { 
             type: Sequelize.STRING,
             notEmpty: true,
-            notNull: true
+            //notNull: true
         }, 
-        description: { 
+        name_ar: {
+            type: Sequelize.STRING
+        },
+        description_en: { 
+            type: Sequelize.TEXT
+        },
+        description_ar: {
             type: Sequelize.TEXT
         },
         email: { 
             type: Sequelize.STRING,
             isEmail: true, 
+        }, 
+        phoneNumber: {
+            type: Sequelize.INTEGER
+        },
+        address_en: {
+            type: Sequelize.TEXT
+        },
+        address_ar: {
+            type: Sequelize.TEXT
+        },
+        country_code: {
+            type: Sequelize.CHAR(25)
         }, 
         image: { 
             type: Sequelize.STRING,
@@ -43,7 +61,13 @@ module.exports = (sequelize, Sequelize) => {
         locationCity: { 
             type: Sequelize.STRING(45)
         }, 
-        contact: { 
+        status: {
+            type: Sequelize.SMALLINT
+        }, 
+        hasParking: {
+            type: Sequelize.BOOLEAN
+        },
+        instruction: {
             type: Sequelize.TEXT
         },
         /*locationZoom: { 

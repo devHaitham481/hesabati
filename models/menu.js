@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         dishName: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         dishDescription: {
             type: Sequelize.TEXT
@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         isDeleted: {
             type: Sequelize.BOOLEAN
+        },
+        photo: {
+            type: Sequelize.STRING
         },
         // Foreign Keys
         branchId: {
