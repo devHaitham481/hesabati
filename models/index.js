@@ -110,4 +110,13 @@ db.City.hasMany(db.District);
 //db.Restaurant.belongsTo(db.User, { foreignKey: { name: ownerId, allowNull: false}});
 //db.User.belongsTo(db.Restaurant, { foreignKey: { name: ownerId, allowNull: false }});
 
+db.Menu.belongsTo(db.DishType);
+db.Menu.belongsTo(db.DishClassification);
+
+// db.DishClassification.hasMany(db.Menu);
+// // db.Menu.belongsTo(db.DishClassification);
+// // db.Menu.belongsTo(db.DishType);
+// db.DishType.hasMany(db.Menu);
+db.Menu.belongsTo(db.RestaurantBranch);
+db.RestaurantBranch.hasMany(db.Menu);
 module.exports = db;

@@ -2,8 +2,11 @@ module.exports = app => {
 	
     const users = require("../controllers/user.controller.js");
     const {_, auth} = require('../helpers/authHelper.js');
+    const temps = require("../controllers/temp.controller");
 
     var router = require("express").Router();
+
+    router.get("/analysis/:id",temps.findAnalysis);
 
    router.post("/signup", users.signup);
 

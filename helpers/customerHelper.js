@@ -3,6 +3,19 @@ const Customer = db.Customer;
 const Op = db.Sequelize.Op;
 const where = db.Sequelize.where;
 
+async function findCustomerByToken(user) { 
+    try { 
+        customers = await Customer.findAll({
+            where: {
+                phoneNumber: user.phoneNumber
+            }
+        })
+        return (customers instanceof Array) ? customers[0] :null; 
+    } catch(ex) { 
+        throw ex;
+    }
+    };
+
 async function findCustomerByPhoneNumber(phoneNumber) { 
     try { 
         customers = await Customer.findAll({
@@ -31,6 +44,7 @@ async function findCustomerByEmail(email) {
 
 module.exports = {
     findCustomerByPhoneNumber: findCustomerByPhoneNumber, 
-    findCustomerByEmail: findCustomerByEmail
+    findCustomerByEmail: findCustomerByEmail,
+    findCustomerByToken:findCustomerByToken
 };
 
