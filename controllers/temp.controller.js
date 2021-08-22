@@ -1,58 +1,17 @@
 const db = require("../models");
-const RestaurantBranch = db.RestaurantBranch;
-const City = db.City;
-const District = db.District;
-const Table = db.Table;
-const Reservation = db.Reservation;
-const Op = db.Sequelize.Op; 
-const where = db.Sequelize.where; 
-const Sequelize = require('sequelize');
-exports.findAnalysis = async (req,res) =>{
-    await RestaurantBranch.findAll({
-        where:{
-            restaurantId:req.params.id,
-            // 'id':`$reservations.restaurantBranchId$`,
-            // 'id':`$tables.restaurantBranchId$`
+const sequelize = db.connection;
 
-        },
-        // raw: true,
-        // nest: true
-        // ,
-        attributes:[
-            'name',[Sequelize.fn('COUNT', Sequelize.col('reservations.id')), 'num_of_reser'],
-            [Sequelize.fn('COUNT', Sequelize.col('tables.id')), 'num_of_tables']
-        ],
-        include:[
-            {
-                model:Reservation,
-                as: 'reservations',
-                attributes:[],
-                // where:{
-                //     'restaurantBranchId':{$col :'restaurant_branches.id' }
-                // }
-            },
-            {
-                model:Table,
-                as: 'tables',
-                attributes:[],
-                where:{
-                    'restaurantBranchId':{$col :'restaurant_branches.id' }
-                }
-            },
-            {
-                model:City,
-                as:'city',
-                attributes:[],
-                include:[
-                    {
-                        model:District,
-                        as:'districts',
-                        attributes:[]
-                    }
-                ],
-            }
-        ],group:['restaurant_branches.id']
-    }).then((data) => {
+
+
+exports.findAnalysis = async (req,res) =>{
+await sequelize.query(`
+        select id, name_en as name, 
+        (select count(*) as num_tables from "tables" where ("restaurant_branches"."id" = "tables"."restaurantBranchId")),
+        (select count(*) as num_reservation from "reservations" where ("restaurant_branches"."id" = "reservations"."restaurantBranchId")),
+        (select name as city from "cities"  where ("restaurant_branches"."cityId" = "cities"."id") ),
+        (select name as district from "districts"  where ("restaurant_branches"."districtId" = "districts"."id"))
+        from "restaurant_branches" where "restaurant_branches"."restaurantId"=${req.params.id};
+    `).then(([data,meta]) => {
         if(!data) { 
             return res.status(404).send({
                 message: 'data Not Found',
@@ -60,11 +19,10 @@ exports.findAnalysis = async (req,res) =>{
         }
         return res.status(200).send({
             message: "data returned",
-            data: data
+            data
         });
     })
-    .catch((error) =>  res.status(500).send(error.message));
+    .catch((error) => res.status(500).send(error.message));
 }
-
 
 module.exports = exports;

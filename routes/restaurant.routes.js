@@ -1,20 +1,29 @@
 module.exports = app => { 
     const restaurants = require("../controllers/restaurant.controller");
     
+    
 
     var router = require("express").Router();
+
+    //custom routes
+    router.get("/type",restaurants.findByType);
+
+
     //Create
-    router.post("/restaurants", restaurants.create);
+    router.post("/", restaurants.create);
     //Read
-    router.get("/restaurants", restaurants.findAll);
-    router.get("/restaurants/:id", restaurants.findOne);
+    router.get("/", restaurants.findAll);
+    router.get("/:id", restaurants.findOne);
     //Update
-    router.put("/restaurants/:id", restaurants.update);
+    router.put("/:id", restaurants.update);
     //Delete
-    router.delete("/restaurants/:id", restaurants.destroy);
+    router.delete("/:id", restaurants.destroy);
     //router.delete("/restaurants", restaurants.deleteAll);
 
-    app.use('/', router);
+
+    
+
+    app.use('/restaurants', router);
     
     
 };
