@@ -16,7 +16,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         status: {
-            type: Sequelize.TEXT,
+            type: Sequelize.STRING,
+            validate: {
+            isIn: [['cancelled', 'attended', 'active']]
+            }
         },
         specialRequest: {
             type: Sequelize.TEXT
@@ -26,7 +29,8 @@ module.exports = (sequelize, Sequelize) => {
         },
         isDeleted: {
             type: Sequelize.BOOLEAN
-        }
+        }, 
+
         // Foreign Keys
         //tableId
         //restaurantBranchId

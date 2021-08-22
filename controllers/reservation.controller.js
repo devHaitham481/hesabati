@@ -1,11 +1,101 @@
 //const { Table, Customer, RestaurantBranch } = require('../models');
 const db = require('../models');
+const reservation = require('../models/reservation');
 const Reservation = db.Reservation;
 const Customer = db.Customer; 
 const RestaurantBranch = db.RestaurantBranch;
 const Table = db.Table;
 const Op = db.Sequelize.Op;
 const where = db.Sequelize.where; 
+
+
+
+const findCompleted = async (req, res) => { 
+    console.log(req.body);
+    await Reservation.findAll(
+        {
+        where: {status: 'attended'}
+    },
+        {
+            include: [
+            {
+                model: Table
+            }, 
+        {
+            model: Customer
+        },
+    {
+        model: RestaurantBranch
+    }]
+        }
+    )
+    .then((reservations) => {
+        return res.status(200).send({
+            message: "reservations returned", 
+            data: reservations
+        })
+    })
+    .catch((error) => {res.status(400).send(error);});
+
+}
+
+const findCancelled = async (req, res) => { 
+    console.log(req.body);
+    await Reservation.findAll(
+        {
+        where: {status: 'cancelled'}
+    },
+        {
+            include: [
+            {
+                model: Table
+            }, 
+        {
+            model: Customer
+        },
+    {
+        model: RestaurantBranch
+    }]
+        }
+    )
+    .then((reservations) => {
+        return res.status(200).send({
+            message: "reservations returned", 
+            data: reservations
+        })
+    })
+    .catch((error) => {res.status(400).send(error);});
+
+}
+
+const findUpcoming = async (req, res) => { 
+    console.log(req.body);
+    await Reservation.findAll(
+        {
+        where: {status: 'active'}
+    },
+        {
+            include: [
+            {
+                model: Table
+            }, 
+        {
+            model: Customer
+        },
+    {
+        model: RestaurantBranch
+    }]
+        }
+    )
+    .then((reservations) => {
+        return res.status(200).send({
+            message: "reservations returned", 
+            data: reservations
+        })
+    })
+    .catch((error) => {res.status(400).send(error);});
+
+}
 
 
 const findAll = async (req, res) => { 
@@ -68,13 +158,21 @@ const findOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-   // console.log(req.body);
-    if(!req.body.date, !req.body.time) {
+    console.log(req.body);
+    // if(!req.body.date, !req.body.time) {
+    //     res.status(400).send({
+    //         message: 'Please provide all fields'
+    //     });
+    //     return;
+    // }
+    if (req.body.status.toString().trim() !== 'active' && 
+    req.body.status.toString().trim() !== 'cancelled' &&
+    req.body.status.toString().trim() !== 'attended') {
         res.status(400).send({
-            message: 'Please provide all fields'
-        });
-        return;
-    }
+            message: "status value must be as the following [active,cancelled,attended]"
+        })
+        return
+    };
     const newReservation = {
         date: req.body.date,
         time: req.body.time, 
@@ -138,10 +236,29 @@ const destroy = async (req, res) => {
     })
 };
 
+const cancelReservation = async (req, res) => {
+    console.log(req.body); 
+    Reservation.findByPk(req.params.id)
+    .then((reservation) => {
+        if (!reservation) { 
+        return res.status(400).send({
+            message: 'Reservation Not Found'
+        });
+    }  reservation.update({
+            status: 'cancelled'
+        })
+    })
+    
+}
+
 module.exports = {
     findAll,
     findOne,
     create,
     update, 
-    destroy
+    destroy,
+    cancelReservation,
+    findCancelled,
+    findUpcoming,
+    findCompleted
 };

@@ -22,15 +22,15 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         // Foreign Keys
-        branchId: {
-            type: Sequelize.INTEGER
-        },
-        dishTypeId: {
-            type: Sequelize.INTEGER
-        },
-        dishClassificationId: {
-            type: Sequelize.INTEGER
-        }
+        // branchId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // dishTypeId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // dishClassificationId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
     return Menu;
 };
