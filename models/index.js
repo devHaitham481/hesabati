@@ -14,6 +14,17 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   },
 });
+//   const database_url = "postgresql+ssh://forge@172.104.137.65/forge@127.0.0.1/forge?name=dev-env&usePrivateKey=true"
+// const sequelize = new Sequelize(
+
+//   database_url,
+//   {
+//     ssl = true,
+//     dialectOptions = {
+//       ssl: true,
+//     },
+//   },
+// );
 
 const db = {};
 
@@ -109,5 +120,6 @@ db.City.hasMany(db.District);
 
 //db.Restaurant.belongsTo(db.User, { foreignKey: { name: ownerId, allowNull: false}});
 //db.User.belongsTo(db.Restaurant, { foreignKey: { name: ownerId, allowNull: false }});
-
+// sequelize.sync({ force: true });
+// console.log("All models were synchronized successfully.");
 module.exports = db;
