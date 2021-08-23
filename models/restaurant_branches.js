@@ -6,20 +6,21 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true, 
             allowNull: false
         },
-        name_en: { 
+        name: { 
             type: Sequelize.STRING,
             notEmpty: true,
             //notNull: true
-        }, 
-        name_ar: {
-            type: Sequelize.STRING
         },
-        description_en: { 
+        // name_ar: {
+        //     type: Sequelize.STRING,
+        //     notEmpty: true
+        // },
+        description: { 
             type: Sequelize.TEXT
         },
-        description_ar: {
-            type: Sequelize.TEXT
-        },
+        // description_ar: {
+        //     type: Sequelize.TEXT
+        // },
         email: { 
             type: Sequelize.STRING,
             isEmail: true, 
@@ -27,12 +28,12 @@ module.exports = (sequelize, Sequelize) => {
         phoneNumber: {
             type: Sequelize.INTEGER
         },
-        address_en: {
+        address: {
             type: Sequelize.TEXT
         },
-        address_ar: {
-            type: Sequelize.TEXT
-        },
+        // address_ar: {
+        //     type: Sequelize.TEXT
+        // },
         country_code: {
             type: Sequelize.CHAR(25)
         }, 
