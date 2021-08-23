@@ -122,4 +122,14 @@ db.City.hasMany(db.District);
 //db.User.belongsTo(db.Restaurant, { foreignKey: { name: ownerId, allowNull: false }});
 // sequelize.sync({ force: true });
 // console.log("All models were synchronized successfully.");
+
+db.Menu.belongsTo(db.DishType);
+db.Menu.belongsTo(db.DishClassification);
+
+// db.DishClassification.hasMany(db.Menu);
+// // db.Menu.belongsTo(db.DishClassification);
+// // db.Menu.belongsTo(db.DishType);
+// db.DishType.hasMany(db.Menu);
+db.Menu.belongsTo(db.RestaurantBranch);
+db.RestaurantBranch.hasMany(db.Menu);
 module.exports = db;
