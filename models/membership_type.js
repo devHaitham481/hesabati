@@ -15,10 +15,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.FLOAT
         },
 
-        // Foreign Keys
-        restaurantId: {
-            type: Sequelize.INTEGER
-        }
+        // // Foreign Keys
+        // restaurantId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
 
     return MembershipType;

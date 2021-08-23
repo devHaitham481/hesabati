@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "Dafa.sa@123",
-    "database": "tuxedo_test_db",
-    "host": "127.0.0.1",
+    "username": "forge",
+    "password": "9cWOHth0E0ToPaBSOs9U",
+    "database": "tuxedo_db",
+    "host": "172.104.137.65",
     "dialect": "postgres"
   },
   "test": {

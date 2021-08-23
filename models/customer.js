@@ -27,9 +27,12 @@ module.exports = (sequelize, Sequelize) => {
     email: {
       type: Sequelize.STRING
     },
-    gender: {
-      type: Sequelize.SMALLINT
-    },
+    gender: { 
+			type: Sequelize.TEXT,
+      isIn: [['male', 'female']], 
+			notNull: true, 
+  		notEmpty: true
+  	},
     isDeleted: {
       type: Sequelize.BOOLEAN
     }, 

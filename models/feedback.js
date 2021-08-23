@@ -15,12 +15,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.SMALLINT
         },
         // Foreign Keys
-        customerId: {
-            type: Sequelize.INTEGER
-        },
-        branchId: {
-            type: Sequelize.INTEGER
-        }
+        // customerId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // branchId: {
+        //     type: Sequelize.INTEGER
+        // }
 
     });
 

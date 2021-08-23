@@ -7,12 +7,12 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         // Foreign Keys
-        customerId: {
-            type: Sequelize.INTEGER
-        },
-        membershipTypeId: {
-            type: Sequelize.INTEGER
-        }
+        // customerId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // membershipTypeId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
 
     return CustomerMembership;

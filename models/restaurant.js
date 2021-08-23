@@ -14,9 +14,6 @@
     companyName_en: {
       type: Sequelize.STRING
     },
-    companyName_en: {
-      type: Sequelize.STRING
-    },
     companyName_ar: {
       type: Sequelize.STRING
     },
