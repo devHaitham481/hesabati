@@ -5,8 +5,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    //custom routes
-    router.get("/type",restaurants.findByType);
+
 
 
     //Create

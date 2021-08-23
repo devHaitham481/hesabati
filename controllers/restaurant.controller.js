@@ -4,30 +4,6 @@ const Op = db.Sequelize.Op;
 const where = db.Sequelize.where; 
 const User = db.User;
 
-const findByType = async (req,res) =>{
-    await Restaurant.findAll(
-        {
-            where:{
-                restaurantTypeId:req.body.typeId
-            }
-        }
-    ).then((data)=>{
-        if(!data){
-            res.status(400).send({message:'data Not found'});
-        }
-
-        res.status(200).send({
-            message:'resturants filtered by typed successfully',
-            restaurants:data
-        })
-    }).catch((error)=>{
-        res.status(500).send({
-            message:'an error occured',
-            details:error.message
-        })
-    })
-}
-
 
 const findAll = async (req, res) => { 
     console.log(req.body);
@@ -152,6 +128,5 @@ module.exports = {
     findOne,
     create,
     destroy,
-    update,
-    findByType
+    update
 };
