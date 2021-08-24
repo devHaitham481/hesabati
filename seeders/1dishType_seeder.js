@@ -8,7 +8,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     let data = [];
-    let amount = 40;
+    let amount = 10;
 
     while(amount--) {
       data.push({
@@ -18,11 +18,15 @@ module.exports = {
         updatedAt:new Date
       });
     }
-    return queryInterface.bulkInsert('dish_classifications', data, {});
+    return queryInterface.bulkInsert('dish_types', data, {});
   },
 
   down: async (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkDelete('dish_classifications', null, {});
+    return queryInterface.bulkDelete('dish_types', null,{
+      truncate: true,
+      cascade: true,
+      restartIdentity:true
+    });
   }
 };

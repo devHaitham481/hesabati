@@ -1,20 +1,21 @@
 //const { Table, Customer, RestaurantBranch } = require('../models');
 const db = require('../models');
-const reservation = require('../models/reservation');
 const Reservation = db.Reservation;
 const Customer = db.Customer; 
 const RestaurantBranch = db.RestaurantBranch;
 const Table = db.Table;
 const Op = db.Sequelize.Op;
-const where = db.Sequelize.where; 
+const where = db.Sequelize.where;
+const {findCustomerByToken} = require('../helpers/customerHelper'); 
 
 
 
-const findCompleted = async (req, res) => { 
+const findCompleted = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
     await Reservation.findAll(
         {
-        where: {status: 'attended'}
+        where: {status: 'attended',customerId:customer.id}
     },
         {
             include: [
@@ -39,11 +40,12 @@ const findCompleted = async (req, res) => {
 
 }
 
-const findCancelled = async (req, res) => { 
+const findCancelled = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
     await Reservation.findAll(
         {
-        where: {status: 'cancelled'}
+        where: {status: 'cancelled',customerId:customer.id}
     },
         {
             include: [
@@ -68,11 +70,12 @@ const findCancelled = async (req, res) => {
 
 }
 
-const findUpcoming = async (req, res) => { 
+const findUpcoming = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
     await Reservation.findAll(
         {
-        where: {status: 'active'}
+        where: {status: 'active',customerId:customer.id}
     },
         {
             include: [

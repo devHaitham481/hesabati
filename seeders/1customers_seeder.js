@@ -8,7 +8,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     let data = [];
-    let amount = 50;
+    let amount = 10;
     let genders = [ 'female' , 'male' ];
     let sources = ['backend', 'ios', 'android'];
     let type = ['active', 'pending', 'deleted'];
@@ -44,6 +44,10 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkDelete('customers', null, {});
+    return queryInterface.bulkDelete('customers', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity:true
+    });
   }
 };

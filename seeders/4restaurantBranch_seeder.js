@@ -8,7 +8,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     let data = [];
-    let amount = 150;
+    let amount = 10;
 
     while(amount--) {
       data.push({
@@ -31,6 +31,9 @@ module.exports = {
         workingHours:faker.random.words(),
         workingDays:faker.date.weekday(),
         offDays:faker.date.weekday(),
+        restaurantId:faker.datatype.number({min:1,max:10}),
+        cityId:faker.datatype.number({min:1,max:10}),
+        districtId:faker.datatype.number({min:1,max:10}),
         createdAt: new Date,
         updatedAt: new Date
       });
@@ -40,6 +43,10 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkDelete('restaurant_branches', null, {});
+    return queryInterface.bulkDelete('restaurant_branches', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity:true
+    });
   }
 };

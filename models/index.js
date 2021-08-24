@@ -61,7 +61,7 @@ db.PermissionRole = require('./permission_role.js')(db.connection, db.Sequelize)
 db.RestaurantPhoto = require('./restaurant_photo.js')(db.connection, db.Sequelize);
 db.TablePhoto = require('./table_photo.js')(db.connection, db.Sequelize); 
 db.RoleUser = require('./role_user.js')(db.connection, db.Sequelize);
-
+db.OrderDetails = require("./order_details")(db.connection,db.Sequelize);
 
 
 
@@ -124,20 +124,26 @@ db.Restaurant.hasMany(db.RestaurantBranch);
 
 
 // Order / Customer
-db.Customer.hasMany(db.Order);
+// db.Customer.hasMany(db.Order);
 //db.Order.belongsTo(db.Customer);
 
 // Order / Reservation
-db.Reservation.hasMany(db.Order);
+db.Reservation.hasOne(db.Order);
 db.Order.belongsTo(db.Reservation);
 
 
+
+// // Order / Items many to many relationship
+db.Order.belongsToMany(db.Menu,{through: db.OrderDetails });
+db.Menu.belongsToMany(db.Order,{through: db.OrderDetails });
+
+
 // Order / Menu [dish item id]
-db.Menu.hasMany(db.Order);
+// db.Menu.hasMany(db.Order);
 //db.Order.belongsTo(db.Menu);
 
 // Order / RestaurantBranch
-db.RestaurantBranch.hasMany(db.Order);
+// db.RestaurantBranch.hasMany(db.Order);
 //db.Order.belongsTo(db.RestaurantBranch);
 
 //db.Customer.belongsTo(db.RestaurantBranch);

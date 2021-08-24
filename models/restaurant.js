@@ -17,6 +17,9 @@
     companyName_ar: {
       type: Sequelize.STRING
     },
+    aboutUs:{
+      type:Sequelize.TEXT
+    },
     phoneNumber: {
       type: Sequelize.INTEGER
     },
