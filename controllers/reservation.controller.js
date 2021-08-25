@@ -19,14 +19,15 @@ const findCompleted = async (req, res) => {
         {
             include: [
             {
-                model: Table
+                 model: Table
             }, 
-        {
-            model: Customer
-        },
-    {
-        model: RestaurantBranch
-    }]
+            {
+                 model: Customer
+            },
+            {
+                 model: RestaurantBranch
+            }
+        ]
         }
     )
     .then((reservations) => {

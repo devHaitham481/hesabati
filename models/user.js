@@ -38,7 +38,10 @@ module.exports = (sequelize, Sequelize) => {
 						type: Sequelize.STRING
 		}, 
 		gender: { 
-			type: Sequelize.SMALLINT, 
+			type: Sequelize.TEXT, 
+      // validate: {
+      //   isIn: ['Male', 'Female']
+      // },
 			notNull: true, 
   		notEmpty: true
   	},

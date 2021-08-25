@@ -19,7 +19,7 @@ await sequelize.query(`
         }
         return res.status(200).send({
             message: "data returned",
-            data
+            data: data
         });
     })
     .catch((error) => res.status(500).send(error.message));
