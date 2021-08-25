@@ -11,10 +11,10 @@ module.exports = (sequelize, Sequelize) => {
             notEmpty: true,
             notNull: true
         },
-        // Foreign Keys
-        reservationId: {
-            type: Sequelize.INTEGER
-        }
+        // // Foreign Keys
+        // reservationId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
 
     return ReservationGuest;

@@ -16,7 +16,12 @@ exports.findProfile = async(req,res) => {
         data:{
             firstName: customer.firstName,
             lastName: customer.lastName,
+            firstName: customer.firstName,
+            lastName: customer.lastName,
             phoneNumber: customer.phoneNumber,
+            email:customer.email,
+            gender:customer.gender,
+            photo:customer.photo
         }
     })}).catch(err => {
         res.status(500).send({
@@ -31,10 +36,12 @@ exports.updateProfile = async(req,res) => {
     const customer = await findCustomerByToken(req.user);
     await Customer.update(
         {
-            firstName:req.body.firstName,
-            lastName:req.body.lastName,
-            phoneNumber:req.body.phoneNumber,
-            email:req.body.email
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            email:req.body.email,
+            gender:req.body.gender,
+            photo:req.body.photo
         },
         {
             where:{
@@ -49,6 +56,8 @@ exports.updateProfile = async(req,res) => {
                 lastName:req.body.lastName,
                 phoneNumber:req.body.phoneNumber,
                 email:req.body.email,
+                gender:req.body.gender,
+                photo:req.body.photo,
                 token: jwt.sign({
                     phoneNumber: req.body.phoneNumber, 
                     password: req.body.password

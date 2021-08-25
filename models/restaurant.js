@@ -14,14 +14,11 @@
     companyName_en: {
       type: Sequelize.STRING
     },
-    // companyName_ar: {
-    //   type: Sequelize.STRING
-    // },
-    // companyName_ar: {
-    //   type: Sequelize.STRING
-    // },
-    aboutUs: {
-      type: Sequelize.TEXT
+    companyName_ar: {
+      type: Sequelize.STRING
+    },
+    aboutUs:{
+      type:Sequelize.TEXT
     },
     phoneNumber: {
       type: Sequelize.INTEGER

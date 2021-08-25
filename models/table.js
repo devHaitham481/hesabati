@@ -28,7 +28,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         is_open: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BOOLEAN
         }
         // Foreign Keys
         //restaurantBranchId 

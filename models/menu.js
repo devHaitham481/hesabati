@@ -24,16 +24,16 @@ module.exports = (sequelize, Sequelize) => {
         },
         // Foreign Keys
 // <<<<<<< HEAD
-// =======
-        branchId: {
-            type: Sequelize.INTEGER
-        },
-        dishTypeId: {
-            type: Sequelize.INTEGER
-        },
-        dishClassificationId: {
-            type: Sequelize.INTEGER
-        }
+// // =======
+//         branchId: {
+//             type: Sequelize.INTEGER
+//         },
+//         dishTypeId: {
+//             type: Sequelize.INTEGER
+//         },
+//         dishClassificationId: {
+//             type: Sequelize.INTEGER
+//         }
 // =======
         // // Foreign Keys
 // >>>>>>> 6d329d123ada3de6de2d5f6d2f5fabf8f2d9f2bf

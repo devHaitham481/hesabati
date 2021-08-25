@@ -36,7 +36,7 @@ db.RestaurantBranch = require('./restaurant_branches.js')(db.connection, db.Sequ
 db.Customer = require('./customer.js')(db.connection, db.Sequelize);
 db.Restaurant = require('./restaurant.js')(db.connection, db.Sequelize);
 db.Reservation = require('./reservation.js')(db.connection, db.Sequelize);
-// db.ReservationGuest = require('./reservation_guests.js')(db.connection, db.Sequelize);
+db.ReservationGuest = require('./reservation_guests.js')(db.connection, db.Sequelize);
 db.Order = require('./order.js')(db.connection, db.Sequelize);
 db.Menu = require('./menu.js')(db.connection, db.Sequelize);
 db.DishType = require('./dish_type.js')(db.connection, db.Sequelize);
@@ -45,10 +45,10 @@ db.Country = require('./country')(db.connection, db.Sequelize);
 db.City = require('./city.js')(db.connection, db.Sequelize);
 db.District = require('./district.js')(db.connection, db.Sequelize);
 db.RestaurantType = require('./restaurant_type.js')(db.connection, db.Sequelize);
-// db.MembershipType = require('./membership_type')(db.connection, db.Sequelize);
-// db.Feedback = require('./feedback.js')(db.connection, db.Sequelize);
+db.MembershipType = require('./membership_type')(db.connection, db.Sequelize);
+db.Feedback = require('./feedback.js')(db.connection, db.Sequelize);
 db.Table = require('./table.js')(db.connection, db.Sequelize);
-// db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
+db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
 // db.Notification = require('./notification.js')(db.connection, db.Sequelize);
 db.Category = require('./category.js')(db.connection, db.Sequelize);
 db.Permission = require('./permission.js')(db.connection, db.Sequelize);
@@ -61,7 +61,7 @@ db.PermissionRole = require('./permission_role.js')(db.connection, db.Sequelize)
 db.RestaurantPhoto = require('./restaurant_photo.js')(db.connection, db.Sequelize);
 db.TablePhoto = require('./table_photo.js')(db.connection, db.Sequelize); 
 db.RoleUser = require('./role_user.js')(db.connection, db.Sequelize);
-
+db.OrderDetails = require("./order_details")(db.connection,db.Sequelize);
 
 
 
@@ -78,6 +78,30 @@ db.PermissionRole.belongsTo(db.Role);
 
 db.RoleUser.belongsTo(db.User);
 db.RoleUser.belongsTo(db.Role);
+
+//memberships
+db.Restaurant.hasMany(db.MembershipType);
+db.MembershipType.belongsTo(db.Restaurant);
+
+db.CustomerMembership.belongsTo(db.Customer);
+db.Customer.hasOne(db.CustomerMembership);
+
+db.MembershipType.hasMany(db.CustomerMembership);
+//db.CustomerMembership.belongsTo(db.MembershipType);
+
+
+
+
+// Reservation / ReservationGuest
+db.Reservation.hasMany(db.ReservationGuest);
+db.ReservationGuest.belongsTo(db.Reservation);
+
+//feedbacks
+db.Customer.hasMany(db.Feedback);
+db.Feedback.belongsTo(db.Customer);
+
+db.RestaurantBranch.hasMany(db.Feedback);
+db.Feedback.belongsTo(db.RestaurantBranch);
 
 db.Restaurant.belongsTo(db.Category);
 //db.Restaurant.belongsTo(db.User);
@@ -97,9 +121,36 @@ db.RestaurantBranch.hasMany(db.Table);
 // Restaurant / Restaurant Branches
 db.RestaurantBranch.belongsTo(db.Restaurant);
 db.Restaurant.hasMany(db.RestaurantBranch);
+
+
 // Order / Customer
-db.Customer.hasMany(db.Order);
-db.Order.belongsTo(db.Customer);
+// db.Customer.hasMany(db.Order);
+//db.Order.belongsTo(db.Customer);
+
+// Order / Reservation
+db.Reservation.hasOne(db.Order);
+db.Order.belongsTo(db.Reservation);
+
+
+
+// // Order / Items many to many relationship
+db.Order.belongsToMany(db.Menu,{through: {
+  model:"order_details",
+  unique:false
+},    constraints: false },);
+db.Menu.belongsToMany(db.Order,{through: {
+  model:"order_details",
+  unique:false
+},    constraints: false },);
+
+// Order / Menu [dish item id]
+// db.Menu.hasMany(db.Order);
+//db.Order.belongsTo(db.Menu);
+
+// Order / RestaurantBranch
+// db.RestaurantBranch.hasMany(db.Order);
+//db.Order.belongsTo(db.RestaurantBranch);
+
 //db.Customer.belongsTo(db.RestaurantBranch);
 db.Restaurant.belongsTo(db.User);
 
@@ -124,7 +175,9 @@ db.City.hasMany(db.District);
 // console.log("All models were synchronized successfully.");
 
 db.Menu.belongsTo(db.DishType);
+db.DishType.hasMany(db.Menu);
 db.Menu.belongsTo(db.DishClassification);
+db.DishClassification.hasMany(db.Menu);
 
 // db.DishClassification.hasMany(db.Menu);
 // // db.Menu.belongsTo(db.DishClassification);
@@ -132,4 +185,9 @@ db.Menu.belongsTo(db.DishClassification);
 // db.DishType.hasMany(db.Menu);
 db.Menu.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Menu);
+
+// sequelize.sync({ force: true });
+// console.log("All models were synchronized successfully.");
+
+
 module.exports = db;

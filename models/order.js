@@ -7,18 +7,18 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         // Foreign Keys
-        customerId: {
-            type: Sequelize.INTEGER
-        },
-        dishId: {
-            type: Sequelize.INTEGER
-        },
-        reservationId: {
-            type: Sequelize.INTEGER
-        },
-        branchId: {
-            type: Sequelize.INTEGER
-        }
+        // customerId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // dishId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // reservationId: {
+        //     type: Sequelize.INTEGER
+        // },
+        // branchId: {
+        //     type: Sequelize.INTEGER
+        // }
     });
     return Order;
 };

@@ -38,10 +38,15 @@ module.exports = (sequelize, Sequelize) => {
 						type: Sequelize.STRING
 		}, 
 		gender: { 
+<<<<<<< HEAD
 			type: Sequelize.TEXT, 
       // validate: {
       //   isIn: ['Male', 'Female']
       // },
+=======
+			type: Sequelize.TEXT,
+      isIn: [['male', 'female']], 
+>>>>>>> staged2
 			notNull: true, 
   		notEmpty: true
   	},
