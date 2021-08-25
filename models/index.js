@@ -134,9 +134,14 @@ db.Order.belongsTo(db.Reservation);
 
 
 // // Order / Items many to many relationship
-db.Order.belongsToMany(db.Menu,{through: db.OrderDetails });
-db.Menu.belongsToMany(db.Order,{through: db.OrderDetails });
-
+db.Order.belongsToMany(db.Menu,{through: {
+  model:"order_details",
+  unique:false
+},    constraints: false },);
+db.Menu.belongsToMany(db.Order,{through: {
+  model:"order_details",
+  unique:false
+},    constraints: false },);
 
 // Order / Menu [dish item id]
 // db.Menu.hasMany(db.Order);

@@ -7,6 +7,7 @@ const Table = db.Table;
 const Op = db.Sequelize.Op;
 const where = db.Sequelize.where;
 const {findCustomerByToken} = require('../helpers/customerHelper'); 
+const  Order  = db.Order
 
 
 
@@ -15,19 +16,21 @@ const findCompleted = async (req, res) => {
     console.log(req.body);
     await Reservation.findAll(
         {
-        where: {status: 'attended',customerId:customer.id}
-    },
-        {
+        where: {status: 'attended',customerId:customer.id},
             include: [
-            {
-                model: Table
-            }, 
-        {
-            model: Customer
-        },
-    {
-        model: RestaurantBranch
-    }]
+                {
+                    model: Table
+                }, 
+                {
+                    model: Customer
+                },
+                {
+                    model: RestaurantBranch
+                },
+                {
+                    model:Order
+                }
+            ]
         }
     )
     .then((reservations) => {
@@ -45,19 +48,21 @@ const findCancelled = async (req, res) => {
     console.log(req.body);
     await Reservation.findAll(
         {
-        where: {status: 'cancelled',customerId:customer.id}
-    },
-        {
+        where: {status: 'cancelled',customerId:customer.id},
             include: [
-            {
-                model: Table
-            }, 
-        {
-            model: Customer
-        },
-    {
-        model: RestaurantBranch
-    }]
+                {
+                    model: Table
+                }, 
+                {
+                    model: Customer
+                },
+                {
+                    model: RestaurantBranch
+                },
+                {
+                    model:Order
+                }
+            ]
         }
     )
     .then((reservations) => {
@@ -72,22 +77,24 @@ const findCancelled = async (req, res) => {
 
 const findUpcoming = async (req, res) => {
     const customer = await findCustomerByToken(req.user); 
-    console.log(req.body);
+    console.log(customer);
     await Reservation.findAll(
         {
-        where: {status: 'active',customerId:customer.id}
-    },
-        {
+        where: {status: 'active',customerId:customer.id},
             include: [
-            {
-                model: Table
-            }, 
-        {
-            model: Customer
-        },
-    {
-        model: RestaurantBranch
-    }]
+                {
+                    model: Table
+                }, 
+                {
+                    model: Customer
+                },
+                {
+                    model: RestaurantBranch
+                },
+                {
+                    model:Order
+                }
+            ]
         }
     )
     .then((reservations) => {
@@ -109,15 +116,16 @@ const findAll = async (req, res) => {
     // },
         {
             include: [
-            {
-                model: Table
-            }, 
-        {
-            model: Customer
-        },
-    {
-        model: RestaurantBranch
-    }]
+                {
+                    model: Table
+                }, 
+                {
+                    model: Customer
+                },
+                {
+                    model: RestaurantBranch
+                }
+            ]
         }
     )
     .then((reservations) => {
