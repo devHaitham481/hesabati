@@ -49,6 +49,12 @@ module.exports = (sequelize, Sequelize) => {
         return () => this.getDataValue('password')
       }
     }, 
+    language: {
+      type: Sequelize.STRING,
+      validate: {
+        isIn: [['en', 'ar']]
+        }
+    },
     
 
     salt: {
