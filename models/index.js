@@ -62,8 +62,11 @@ db.RestaurantPhoto = require('./restaurant_photo.js')(db.connection, db.Sequeliz
 db.TablePhoto = require('./table_photo.js')(db.connection, db.Sequelize); 
 db.RoleUser = require('./role_user.js')(db.connection, db.Sequelize);
 db.OrderDetails = require("./order_details")(db.connection,db.Sequelize);
-
-
+db.RestaurantLocale = require("./restaurant_locale.js")(db.connection, db.Sequelize);
+db.MenuLocale = require("./menu_locale.js")(db.connection, db.Sequelize);
+db.DishClassificationLocale = require("./dish_classification_locale.js")(db.connection, db.Sequelize);
+db.DishTypeLocale = require("./dish_type_locale.js")(db.connection, db.Sequelize);
+db.RestaurantBranchLocale = require("./restaurant_branch_locale.js")(db.connection, db.Sequelize);
 
 
 
@@ -186,8 +189,8 @@ db.DishClassification.hasMany(db.Menu);
 db.Menu.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Menu);
 
-// sequelize.sync({ force: true });
-// console.log("All models were synchronized successfully.");
+sequelize.sync({ force: true });
+console.log("All models were synchronized successfully.");
 
 
 module.exports = db;

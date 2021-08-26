@@ -6,13 +6,10 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true, 
             allowNull: false
         }, 
-        name_en: {
+        name: {
             type: Sequelize.STRING,
             notEmpty: true,
             notNull: true
-        },
-        name_ar: {
-            type: Sequelize.STRING
         },
         tel: {
             type: Sequelize.STRING
