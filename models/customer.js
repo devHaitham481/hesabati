@@ -8,17 +8,11 @@ module.exports = (sequelize, Sequelize) => {
       autoIncrement: true, 
       allowNull: false
     },
-    firstName_en: { 
-      type: Sequelize.STRING
-    },
-    firstName_ar: {
+    firstName: { 
       type: Sequelize.STRING
     },
 
-    lastName_en: {
-      type: Sequelize.STRING
-    },
-    lastName_ar: {
+    lastName: {
       type: Sequelize.STRING
     },
     phoneNumber: {
@@ -76,6 +70,12 @@ module.exports = (sequelize, Sequelize) => {
     },
     status: {
       type: Sequelize.SMALLINT
+    },
+    language: {
+      type: Sequelize.STRING,
+      validate: {
+        isIn: [['en', 'ar']]
+        }
     },
     // Foreign Keys
     // branchId: {

@@ -18,18 +18,6 @@ const findCompleted = async (req, res) => {
         {
         where: {status: 'attended',customerId:customer.id},
             include: [
-<<<<<<< HEAD
-            {
-                 model: Table
-            }, 
-            {
-                 model: Customer
-            },
-            {
-                 model: RestaurantBranch
-            }
-        ]
-=======
                 {
                     model: Table
                 }, 
@@ -43,7 +31,6 @@ const findCompleted = async (req, res) => {
                     model:Order
                 }
             ]
->>>>>>> staged2
         }
     )
     .then((reservations) => {

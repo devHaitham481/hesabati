@@ -5,16 +5,7 @@
       primaryKey: true,
       autoIncrement: true,
     },
-    name_en: { 
-      type: Sequelize.STRING
-    },
-    name_ar: {
-      type: Sequelize.STRING
-    },
-    companyName_en: {
-      type: Sequelize.STRING
-    },
-    companyName_ar: {
+    name: { 
       type: Sequelize.STRING
     },
     aboutUs:{
