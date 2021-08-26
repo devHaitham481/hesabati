@@ -10,15 +10,17 @@ const Op = db.Sequelize.Op;
 const RestaurantType = db.RestaurantType;
 //const like = Op.like;
 const where = db.Sequelize.where;
+const {findNearest} = require('../helpers/restaurant_branchHelper');
 
 
 
 const findAll = async (req, res) => {
     let offset = req.query.offset ? parseInt(req.query.offset) : null;
     let limit = req.query.limit ? parseInt(req.query.limit) : null;
+
+    const restaurantName = req.query.name;
     var condition =  restaurantName ? {name: { [Op.iLike]: `%${restaurantName}`}} : null;
     let RestaurantTypeId= req.query.restaurantType ? parseInt(req.query.restaurantType): null ;
-    const restaurantName = req.query.name;
 
     //let limit = parseInt(req.query.limit);
   //  const restaurantName = req.query.name;
@@ -75,9 +77,13 @@ const findAll = async (req, res) => {
                 
             ]
     }).then((restaurantBranches) => {
+        let sortedBranches = restaurantBranches
+        if(req.body.latitude&&req.body.longitude){
+            sortedBranches = findNearest(restaurantBranches,req.body.latitude,req.body.longitude);
+        }
         return res.status(200).send({
             message: "restaurant branches returned", 
-            data: restaurantBranches
+            data: sortedBranches
         })
     })
     .catch((error) => {res.status(500).send(error.message);});
