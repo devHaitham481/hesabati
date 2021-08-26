@@ -19,6 +19,7 @@ const findAll = async (req, res) => {
     var condition =  restaurantName ? {name: { [Op.iLike]: `%${restaurantName}`}} : null;
     let RestaurantTypeId= req.query.restaurantType ? parseInt(req.query.restaurantType): null ;
     const restaurantName = req.query.name;
+    var type = RestaurantTypeId ? {where:{ restaurantTypeId: RestaurantTypeId }} : null ;
 
     //let limit = parseInt(req.query.limit);
   //  const restaurantName = req.query.name;
@@ -28,7 +29,6 @@ const findAll = async (req, res) => {
     
 
     // Invalid value { name: { [Symbol(like)]: '%Maureen%' } }
-    var type = RestaurantTypeId ? {where:{ restaurantTypeId: RestaurantTypeId }} : null ;
     await RestaurantBranch.findAll({
         where: 
         condition
@@ -53,24 +53,12 @@ const findAll = async (req, res) => {
             },
 
             {
-                model: Restaurant, 
+                 model: Restaurant, 
                     type,
-                include: [{
-
-                
+                 include: [{
                     model: RestaurantType
                 }
                 ]
-               // as: 'restaurants'
-
-                // include: [
-                //     {
-                //         model: RestaurantType,
-                //         // where: {
-                //         //     id: RestaurantTypeId
-                //         // }
-
-                //     },
             }
                 
             ]
