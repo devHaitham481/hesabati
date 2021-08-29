@@ -10,7 +10,6 @@ const {findCustomerByToken} = require('../helpers/customerHelper');
 const  Order  = db.Order
 
 
-
 const findCompleted = async (req, res) => {
     const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
@@ -108,12 +107,13 @@ const findUpcoming = async (req, res) => {
 }
 
 
-const findAll = async (req, res) => { 
+const findAll = async (req, res) => {
+    const customer = await findCustomerByToken(req.user);  
     console.log(req.body);
     await Reservation.findAll(
-    //     {
-    //     where: restaurantBranchId: req.body.branch
-    // },
+        {
+        where: {customerId: customer.id}
+        },
         {
             include: [
                 {
@@ -169,6 +169,7 @@ const findOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
     // if(!req.body.date, !req.body.time) {
     //     res.status(400).send({
@@ -176,23 +177,17 @@ const create = async (req, res) => {
     //     });
     //     return;
     // }
-    if (req.body.status.toString().trim() !== 'active' && 
-    req.body.status.toString().trim() !== 'cancelled' &&
-    req.body.status.toString().trim() !== 'attended') {
-        res.status(400).send({
-            message: "status value must be as the following [active,cancelled,attended]"
-        })
-        return
-    };
+    let status = "active"
     const newReservation = {
         date: req.body.date,
         time: req.body.time, 
         numberOfGuests: req.body.numberOfGuests, 
-        status: req.body.status, 
-        notes: req.body.notes,
+        status: status, 
+        specialRequest: req.body.specialRequest,
+        occassion: req.body.occassion,
         restaurantBranchId: req.body.restaurantBranchId,
         tableId: req.body.tableId,
-        // customerId: req.body.customerId
+        customerId: customer.id
     };
     // console.log(newReservation);
       Reservation.create( newReservation )
@@ -204,6 +199,7 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body);
     return Reservation.findByPk(req.params.id)
     .then((reservation) => {
@@ -212,21 +208,28 @@ const update = async (req, res) => {
                 message: 'Reservation Not Found'
             });
         }
+
+        if(reservation.customerId!=customer.id){
+            return res.status(400).send("You don't have permission to update other people reservations");
+        }
+
+        let status = 'active';
         reservation.update({
             date: req.body.date,
             time: req.body.time, 
             numberOfGuests: req.body.numberOfGuests, 
-            status: req.body.status, 
-            notes: req.body.notes,
+            status: status, 
+            specialRequest: req.body.specialRequest,
+            occassion: req.body.occassion,
             restaurantBranchId: req.body.restaurantBranchId,
             tableId: req.body.tableId,
-          //  customerId: 
+            customerId: customer.id
         })
         .then((reservation) => res.status(200).send({
             message: "Reservation Updated", 
             data: reservation
-        })
-        .catch((error) => res.status(500).send(error)));
+        }))
+        .catch((error) => res.status(500).send(error));
     })
 };
 
@@ -248,16 +251,33 @@ const destroy = async (req, res) => {
 };
 
 const cancelReservation = async (req, res) => {
+    const customer = await findCustomerByToken(req.user); 
     console.log(req.body); 
-    Reservation.findByPk(req.params.id)
-    .then((reservation) => {
+    await Reservation.findByPk(req.params.id)
+    .then(async(reservation) => {
         if (!reservation) { 
-        return res.status(400).send({
-            message: 'Reservation Not Found'
-        });
-    }  reservation.update({
-            status: 'cancelled'
+            return res.status(400).send({
+                message: 'Reservation Not Found'
+            });
+        }
+
+        if(reservation.status=="cancelled"){
+            return res.status(400).send("reservation already cancelled");
+        }
+
+        if(reservation.customerId!=customer.id){
+            return res.status(400).send("You don't have permission to cancel other people reservations");
+        }
+
+        await reservation.update({
+        status: 'cancelled'
         })
+
+        return res.status(200).send("reservation deleted successfuly")
+
+        
+    }).catch((err)=>{
+        res.status(500).send("server error \n"+err.message)
     })
     
 }

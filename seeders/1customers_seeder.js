@@ -12,17 +12,15 @@ module.exports = {
     let genders = [ 'female' , 'male' ];
     let sources = ['backend', 'ios', 'android'];
     let type = ['active', 'pending', 'deleted'];
+    let lang = ['en','ar'];
 
     while(amount--) {
       data.push({
-        firstName_en: faker.name.firstName(),
-        lastName_en: faker.name.lastName(),
-        firstName_ar: faker.name.firstName(),
-        lastName_ar: faker.name.lastName(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
         email: faker.internet.email(), 
         phoneNumber: faker.datatype.number(),
-        address_en: faker.address.streetAddress(),
-        address_ar: faker.address.streetAddress(),
+        address: faker.address.streetAddress(),
         isDeleted:faker.datatype.boolean(),
         countryCode:faker.address.countryCode(),
         avatar:faker.image.avatar(),
@@ -34,7 +32,8 @@ module.exports = {
         longitude:faker.address.longitude(),
         latitude:faker.address.latitude(),
         token:faker.internet.password(),
-        status:faker.datatype.number({min:0,max:100}),
+        status:faker.datatype.number({min:0,max:10}),
+        language:faker.random.arrayElement(lang),
         createdAt: new Date,
         updatedAt: new Date
       });

@@ -12,8 +12,7 @@ module.exports = {
 
     while(amount--) {
       data.push({
-        name_en: faker.address.country(),
-        name_ar: faker.address.country(),
+        name: faker.address.country(),
         tel: faker.address.countryCode(),
         isDeleted:faker.datatype.boolean(),
         code:faker.address.countryCode(),

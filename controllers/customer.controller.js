@@ -16,12 +16,10 @@ exports.findProfile = async(req,res) => {
         data:{
             firstName: customer.firstName,
             lastName: customer.lastName,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
             phoneNumber: customer.phoneNumber,
             email:customer.email,
             gender:customer.gender,
-            photo:customer.photo
+            avatar:customer.avatar
         }
     })}).catch(err => {
         res.status(500).send({
@@ -36,17 +34,17 @@ exports.updateProfile = async(req,res) => {
     const customer = await findCustomerByToken(req.user);
     await Customer.update(
         {
+            where:{
+            id:customer.id
+            }
+        },
+        {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             phoneNumber: req.body.phoneNumber,
             email:req.body.email,
             gender:req.body.gender,
-            photo:req.body.photo
-        },
-        {
-            where:{
-            id:customer.id
-            }
+            avatar:req.body.avatar
         }
     ).then(
         res.status(200).send({
@@ -57,7 +55,7 @@ exports.updateProfile = async(req,res) => {
                 phoneNumber:req.body.phoneNumber,
                 email:req.body.email,
                 gender:req.body.gender,
-                photo:req.body.photo,
+                avatar:req.body.avatar,
                 token: jwt.sign({
                     phoneNumber: req.body.phoneNumber, 
                     password: req.body.password
@@ -87,7 +85,9 @@ exports.signup = (req, res) => {
         phoneNumber: req.body.phoneNumber,
         email: req.body.email, 
         password: req.body.password, 
-        gender: req.body.gender
+        gender: req.body.gender,
+        avatar:req.body.avatar
+        
     };
     Customer.create(newCustomer)
             .then( data => { 

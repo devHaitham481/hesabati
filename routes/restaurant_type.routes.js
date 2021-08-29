@@ -10,7 +10,7 @@ module.exports = app => {
     
     //Read
     router.get('/restaurant_types', restaurant_types.findAll);
-    router.get('/restaurant_type/:id', restaurant_types.findAllRestaurantsByType);
+    router.get('/restaurant_types/:id', restaurant_types.findAllRestaurantsByType);
     //Update
 
     //Delete

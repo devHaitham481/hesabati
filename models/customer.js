@@ -39,10 +39,7 @@ module.exports = (sequelize, Sequelize) => {
     avatar: {
       type: Sequelize.STRING
     },
-    address_en: {
-      type: Sequelize.STRING
-    },
-    address_ar: {
+    address: {
       type: Sequelize.STRING
     },
     countryCode: {
@@ -99,6 +96,7 @@ module.exports = (sequelize, Sequelize) => {
     .createHash('RSA-SHA256')
     .update(plainText)
     .update(salt)
+
     .digest('hex')
   }
 
