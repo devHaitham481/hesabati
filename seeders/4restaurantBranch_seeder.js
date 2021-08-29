@@ -23,7 +23,7 @@ module.exports = {
         isActive:faker.datatype.boolean(),
         hasParking:faker.datatype.boolean(),
         country_code:faker.address.countryCode(),
-        status:faker.datatype.number({min:0,max:100}),
+        status:faker.datatype.number({min:0,max:10}),
         instruction:faker.name.lastName(),
         image:faker.image.avatar(),
         longitude:faker.address.longitude(),

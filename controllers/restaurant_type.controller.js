@@ -21,10 +21,17 @@ const findAll = async (req, res) => {
 // /restaurant_types/:id
 const findAllRestaurantsByType = async (req, res) => {
     console.log(req.body); 
-    await RestaurantType.findByPk(req.params.id, {
-        include: {
+    await RestaurantType.findAll({
+        
+        where:{
+            id:req.params.id
+        },
+        
+        include: [
+            {
             model: Restaurant
-        }
+            }
+        ]
     })
     .then((restaurantTypes) => {
         if (!restaurantTypes) {

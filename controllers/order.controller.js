@@ -5,9 +5,10 @@ const Order = db.Order;
 const OrderDetails = db.OrderDetails;
 const sequelize = db.connection
 
+
 const { deleteOrderItems } = require('../helpers/orderHelper');
 
-exports.findOne = async(req,res)=>{//find order by reservation id
+exports.findOne = async(req,res)=>{//find order by order id
     await Order.findOne(
         {
             attributes:['id'],
@@ -15,19 +16,24 @@ exports.findOne = async(req,res)=>{//find order by reservation id
                 "id":req.params.id
                 
                 
-            },
-            include:[
-                {
-                    model:Menu,
-                    attributes:['id','dishName','dishDescription','dishPrice'],
-                    through: { attributes: [] }
-                }
-            ]
+            }
         }
 
-    ).then((data)=>{
+    ).then(async(order)=>{
+        if(!order){
+            return res.status(400).send("no such order")
+        }
+
+        const [data,meta] = await sequelize.query(
+            `select "order_details"."id", "menues"."id" as "itemId", "menues"."dishName","menues"."dishDescription","menues"."dishPrice" from "menues","order_details"
+            where "menues"."id" = "order_details"."menueId"
+            and "order_details"."orderId" = ${order.id}
+            `
+        )
+
         res.status(200).send({
             message:"order returened successfully",
+            id:order.id,
             data:data
         });
     }).catch((error)=>{

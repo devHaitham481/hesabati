@@ -12,9 +12,8 @@ module.exports = {
 
     while(amount--) {
       data.push({
-        name_en: faker.address.city(),
-        name_ar: faker.address.city(),
-        status: faker.datatype.number({min:0,max:100}),
+        name: faker.address.city(),
+        status: faker.datatype.number({min:0,max:10}),
         isDeleted:faker.datatype.boolean(),
         code:faker.address.countryCode(),
         countryId:faker.datatype.number({min:1,max:10}),

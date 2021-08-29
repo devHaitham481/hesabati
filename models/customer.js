@@ -96,6 +96,7 @@ module.exports = (sequelize, Sequelize) => {
     .createHash('RSA-SHA256')
     .update(plainText)
     .update(salt)
+
     .digest('hex')
   }
 

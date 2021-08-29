@@ -56,15 +56,15 @@ const findOne = async (req, res) => {
 
 const create = async (req, res) => { 
     console.log(req.body);
-    if(!req.body.restaurantName, !req.body.restaurantLocation) {
+    if(!req.body.name || !req.body.aboutUs) {
         res.status(400).send({
             message: 'Please provide all fields'
         });
         return;
     }
     const newRestaurant = { 
-        name: req.body.restaurantName,
-        location: req.body.restaurantLocation
+        name: req.body.name,
+        aboutUs: req.body.aboutUs
     };  
     Restaurant.create(newRestaurant)
     .then((restaurant) => res.status(201).send({
@@ -92,8 +92,8 @@ const update = async (req, res) => {
             });
         }
      restaurant.update({
-            name: req.body.restaurantName,
-            location: req.body.restaurantLocation
+            name: req.body.name,
+            aboutUs: req.body.aboutUs
         })
         .then(() => res.status(200).send({
             message: "Restaurant Updated", 

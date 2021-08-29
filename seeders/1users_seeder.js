@@ -9,6 +9,7 @@ module.exports = {
 
     let data = [];
     let amount = 10;
+    let lang = ['en','ar'];
     let genders = [ 'female' , 'male' ];
 
     while(amount--) {
@@ -20,6 +21,7 @@ module.exports = {
         address: faker.address.streetAddress(),
         gender: faker.random.arrayElement(genders),
         salt: faker.internet.password(),
+        language:faker.random.arrayElement(lang),
         password: faker.internet.password(),
         createdAt: new Date,
         updatedAt: new Date

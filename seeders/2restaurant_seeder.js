@@ -12,10 +12,7 @@ module.exports = {
 
     while(amount--) {
       data.push({
-        name_en: faker.name.firstName(),
-        companyName_en: faker.name.lastName(),
-        name_ar: faker.name.firstName(),
-        companyName_ar: faker.name.lastName(),
+        name: faker.name.firstName(),
         aboutUs: faker.lorem.paragraph(),
         phoneNumber: faker.datatype.number(),
         address: faker.address.streetAddress(),
@@ -24,6 +21,7 @@ module.exports = {
         image:faker.image.avatar(),
         longitude:faker.address.longitude(),
         latitude:faker.address.latitude(),
+        restaurantRegisterDocument:faker.lorem.sentence(),
         restaurantTypeId:faker.datatype.number({min:1,max:10}),
         userId:faker.datatype.number({min:1,max:10}),
         categoryId:faker.datatype.number({min:1,max:10}),
