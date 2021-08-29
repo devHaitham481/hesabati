@@ -71,7 +71,15 @@ db.RestaurantBranchLocale = require("./restaurant_branch_locale.js")(db.connecti
 
 
 //Sequelize Associations
-db.Restaurant.belongsTo(db.RestaurantType);
+db.RestaurantType.hasMany(db.Restaurant, {as: 'restaurant'});
+db.Restaurant.belongsTo(db.RestaurantType, {as: 'restaurant_type'});
+
+// Restaurant / Restaurant Branches
+db.RestaurantBranch.belongsTo(db.Restaurant, {as: 'restaurant'});
+db.Restaurant.hasMany(db.RestaurantBranch, {as: 'restaurant_branch'});
+
+
+
 db.RestaurantPhoto.belongsTo(db.Restaurant);
 db.PermissionUser.belongsTo(db.Permission);
 db.PermissionUser.belongsTo(db.User);
@@ -121,9 +129,7 @@ db.Customer.hasOne(db.Reservation);
 // Table / Restaurant Branches
 db.Table.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Table);
-// Restaurant / Restaurant Branches
-db.RestaurantBranch.belongsTo(db.Restaurant);
-db.Restaurant.hasMany(db.RestaurantBranch);
+
 
 
 // Order / Customer
@@ -189,8 +195,8 @@ db.DishClassification.hasMany(db.Menu);
 db.Menu.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Menu);
 
-sequelize.sync({ force: true });
-console.log("All models were synchronized successfully.");
+// sequelize.sync({ force: true });
+// console.log("All models were synchronized successfully.");
 
 
 module.exports = db;
