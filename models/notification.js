@@ -15,14 +15,20 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         destinationType: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            isIn: [['user','customer']]
         },
         sourceId: {
             type: Sequelize.INTEGER
         },
         sourceType: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            isIn: [['user','customer']]
         },
+        isNew:{
+            type:Sequelize.BOOLEAN,
+            defaultValue:true
+        }
         // Foreign Keys
     });
 

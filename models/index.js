@@ -49,7 +49,7 @@ db.MembershipType = require('./membership_type')(db.connection, db.Sequelize);
 db.Feedback = require('./feedback.js')(db.connection, db.Sequelize);
 db.Table = require('./table.js')(db.connection, db.Sequelize);
 db.CustomerMembership = require('./customer_membership.js')(db.connection, db.Sequelize);
-// db.Notification = require('./notification.js')(db.connection, db.Sequelize);
+db.Notification = require('./notification.js')(db.connection, db.Sequelize);
 db.Category = require('./category.js')(db.connection, db.Sequelize);
 db.Permission = require('./permission.js')(db.connection, db.Sequelize);
 // User.getRestaurants(0)
@@ -119,6 +119,7 @@ db.Restaurant.belongsTo(db.Category);
 db.Reservation.belongsTo(db.Table);
 db.Table.hasMany(db.Reservation);
 db.TablePhoto.belongsTo(db.Table);
+db.Table.hasMany(db.TablePhoto);
 // Restaurant Branch / Reservation
 db.Reservation.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Reservation);

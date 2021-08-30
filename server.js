@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Tuxedo APP \n Restaurant Reservations that matter'});
 });
 
+require("./routes/notification.routes")(app);
+require("./routes/table.routes")(app);
 require("./routes/order.routes")(app);
 require("./routes/menu")(app);
 require("./routes/restaurant.routes")(app);
