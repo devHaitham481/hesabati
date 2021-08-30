@@ -4,6 +4,7 @@ module.exports = app => {
     const Feedback = require('../controllers/feedback.controller');
 
     //Create
+    router.post('/restaurant_branches/:id/feedbacks', Feedback.create);
     //Read
     router.get('/feedbacks', Feedback.findAll);
     router.get('/restaurant_branch/:id/feedbacks', Feedback.findFeedbacksofBranch);
