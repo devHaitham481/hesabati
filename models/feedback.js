@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             notNull: true
         },
         rating: {
-            type: Sequelize.SMALLINT
+            type: Sequelize.FLOAT
         },
         // Foreign Keys
         // customerId: {

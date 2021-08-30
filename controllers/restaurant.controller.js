@@ -67,7 +67,7 @@ const create = async (req, res) => {
         aboutUs: req.body.aboutUs
     };  
     Restaurant.create(newRestaurant)
-    .then((restaurant) => res.status(201).send({
+    .then((restaurant) => res.status(204).send({
         message: "Restaurant Created", 
         data: restaurant
     }))
