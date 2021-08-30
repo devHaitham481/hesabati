@@ -3,7 +3,8 @@ const Restaurant = db.Restaurant;
 const Op = db.Sequelize.Op; 
 const where = db.Sequelize.where; 
 const User = db.User;
-
+const RestaurantBranch = db.RestaurantBranch;
+const Feedback = db.Feedback;
 
 const findAll = async (req, res) => { 
     console.log(req.body);
@@ -12,6 +13,15 @@ const findAll = async (req, res) => {
         include: [{
             model: User
         },
+        {
+            model: RestaurantBranch,
+            as: 'restaurant_branch',
+                include: [
+                    {
+                        model: Feedback
+                    }
+                ]
+        }
         
     ], 
     order: [
@@ -25,7 +35,7 @@ const findAll = async (req, res) => {
      data: restaurants
     })}
     )
-    .catch((error) => { res.status(400).send(error);});
+    .catch((error) => { res.status(400).send(error.message);});
     
 };
 
@@ -67,7 +77,7 @@ const create = async (req, res) => {
         aboutUs: req.body.aboutUs
     };  
     Restaurant.create(newRestaurant)
-    .then((restaurant) => res.status(204).send({
+    .then((restaurant) => res.status(201).send({
         message: "Restaurant Created", 
         data: restaurant
     }))

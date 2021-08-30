@@ -45,7 +45,7 @@ const create = async (req, res) => {
         restaurantBranchId: req.params.id
     };
     await Feedback.create(newFeedback) 
-    .then((feedback) => res.status(204).send({
+    .then((feedback) => res.status(201).send({
         message: "Feedback Added", 
         data: feedback
     }))
