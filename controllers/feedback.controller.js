@@ -20,6 +20,7 @@ const findAll = async (req, res) => {
         [ 
             {
                 model: Customer,
+                as: 'customer'
             },
             {
                 model: RestaurantBranch
@@ -36,7 +37,7 @@ const findAll = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    restaurantBranchId = req.params.id;
+    //restaurantBranchId = req.params.id;
     console.log(req.body);
     console.log(req.params.id);
     const newFeedback = {
@@ -68,7 +69,8 @@ const findFeedbacksofBranch = async (req, res) => {
                 model: RestaurantBranch
             }, 
             {
-                model: Customer
+                model: Customer,
+                as: 'customer'
             }
         ]
     }).then((feedbacks) => {

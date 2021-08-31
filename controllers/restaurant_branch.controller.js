@@ -67,6 +67,35 @@ const findAll = async (req, res) => {
     })
     .catch((error) => {res.status(500).send(error.message);});
 }
+const findOne = async (req, res) => {
+    await RestaurantBranch.findOne({
+        // where: 
+        order: [
+            ['id', 'ASC']
+        ],
+        include: 
+        [
+            {
+                model: City,
+              //  as: 'cities'
+            },
+            {
+                model: District,
+                //as: 'districts'
+            },
+            {
+                model: Restaurant, 
+                as: 'restaurant', 
+            }  
+            ]
+    }).then((restaurantBranch) => {
+        return res.status(200).send({
+            message: "restaurant branches returned", 
+            data: restaurantBranch
+        })
+    })
+    .catch((error) => {res.status(500).send(error.message);});
+}
 // const pinOnMap = async (req,res) =>{
 //     let offset = req.query.offset ? parseInt(req.query.offset) : null;
 //     let limit = req.query.limit ? parseInt(req.query.limit) : null;
@@ -89,5 +118,6 @@ const findAll = async (req, res) => {
 //     }
 
 module.exports = {
-    findAll
+    findAll,
+    findOne
 }
