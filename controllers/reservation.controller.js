@@ -21,7 +21,8 @@ const findCompleted = async (req, res) => {
                     model: Table
                 }, 
                 {
-                    model: Customer
+                    model: Customer,
+                    as: 'customer'
                 },
                 {
                     model: RestaurantBranch
@@ -53,7 +54,8 @@ const findCancelled = async (req, res) => {
                     model: Table
                 }, 
                 {
-                    model: Customer
+                    model: Customer,
+                    as: 'customer'
                 },
                 {
                     model: RestaurantBranch
@@ -85,7 +87,8 @@ const findUpcoming = async (req, res) => {
                     model: Table
                 }, 
                 {
-                    model: Customer
+                    model: Customer,
+                    as: 'customer'
                 },
                 {
                     model: RestaurantBranch
@@ -120,7 +123,8 @@ const findAll = async (req, res) => {
                     model: Table
                 }, 
                 {
-                    model: Customer
+                    model: Customer,
+                    as: 'customer'
                 },
                 {
                     model: RestaurantBranch
@@ -147,7 +151,8 @@ const findOne = async (req, res) => {
                     model: Table
                 },
                 {
-                    model: Customer
+                    model: Customer,
+                    as: 'customer'
                 },
                 {
                     model: RestaurantBranch

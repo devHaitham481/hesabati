@@ -124,7 +124,7 @@ db.Table.hasMany(db.TablePhoto);
 db.Reservation.belongsTo(db.RestaurantBranch);
 db.RestaurantBranch.hasMany(db.Reservation);
 // Reservation / Customer
-db.Reservation.belongsTo(db.Customer);
+db.Reservation.belongsTo(db.Customer, {as: 'customer'});
 db.Customer.hasMany(db.Reservation);
 db.Customer.hasOne(db.Reservation);
 // Table / Restaurant Branches

@@ -7,7 +7,7 @@ module.exports = app => {
     // router.post('/restaurant_branches', restaurantBranches.create);
     //Read
     router.get('/restaurant_branches', restaurantBranches.findAll);
-    // router.get('/restaurant_branches/:id', restaurantBranches.findOne);
+    router.get('/restaurant_branches/:id', restaurantBranches.findOne);
     //Update
     // router.put('/restaurant_branches/:id', restaurantBranches.update);
     // //Delete
