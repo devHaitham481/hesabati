@@ -273,7 +273,7 @@ const cancelReservation = async (req, res) => {
         status: 'cancelled'
         })
 
-        return res.status(200).send("reservation deleted successfuly")
+        return res.status(200).send("reservation cancelled successfuly")
 
         
     }).catch((err)=>{
