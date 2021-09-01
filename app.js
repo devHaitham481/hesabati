@@ -3,17 +3,23 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT_PRODUCTION || 5000;
 const path = require("path");
+const db = require('./models');
 
 
 
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "server/views/pages"));
 app.set("views", path.join(__dirname, "./views"))
-app.set("view engine", "ejs");
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))  
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
+
+// // Prepare DB
+// db.connection.sync();
 /**
  * Swagger Doc Declaration
  */
@@ -24,16 +30,17 @@ app.use("/api-docs", swagerServe, swaggerSetup);
  *  Routes Declaration: import route from src/routes.js
  *  and use it as you like here on line 14
  */
-const apiRoutes = require("./routes");
-app.use("/api/v1", apiRoutes);
+// const apiRoutes = require("./routes");
+// app.use("/api/v1", apiRoutes);
 
-require("./routes/home")(app);
+require("./routes/home.routes")(app);
+// require("./routes/user.routes.js")(app);
 
 // 404 error
-app.all("*", (req, res, next) => {
-  const err = new Error(404, "Endpoint Not Found");
-  next(err);
-});
+// app.all("*", (req, res, next) => {
+//   const err = new Error(404, "Endpoint Not Found");
+//   next(err);
+// });
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
