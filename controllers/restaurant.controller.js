@@ -48,7 +48,9 @@ const findOne = async (req, res) => {
         include: [{
             model: User,
             //as: 'user'
-         }], }
+         },
+        ]
+    }
         )
     .then((restaurant) => {
         if(!restaurant) { 

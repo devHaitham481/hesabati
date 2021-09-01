@@ -13,7 +13,7 @@ module.exports = {
     while(amount--) {
       data.push({
         comment:faker.name.title(),
-        rating:faker.datatype.number({min:0,max:5}),
+        star:faker.datatype.number({min:0,max:5}),
         customerId:faker.datatype.number({min:1,max:10}),
         restaurantBranchId:faker.datatype.number({min:1,max:10}),
         createdAt:new Date,

@@ -31,11 +31,17 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         }, 
 
+          
+
         // Foreign Keys
         //tableId
         //restaurantBranchId
         //customerId
 
     });
+    // Reservation.beforeCreate(reservation => {
+    //     if(reservation) {}
+
+    
     return Reservation;
-};
+}

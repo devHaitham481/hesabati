@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
             notEmpty: true,
             notNull: true
         },
-        rating: {
+        star: {
             type: Sequelize.FLOAT
         },
         // Foreign Keys

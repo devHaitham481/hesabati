@@ -182,6 +182,20 @@ const create = async (req, res) => {
     //     });
     //     return;
     // }
+//     const ts = ['10:00-10:30','10:30-11:00','11:00-11:30','11:30-12:00','12:00-12:30','12:30-13:00','13:00-13:30','13:30-14:00','14:00-14:30','14:30-15:00','15:00-15:30','15:30-16:00'],
+//     booked3 = ["11:00-11:30", "13:05-13:35", "14:05-14:15"],
+
+//     avail = (ts, booked) =>
+//       ts.map(item => {
+//         const [start, end] = item.split('-'),
+//               isBooked = !booked
+//                 .map(item => item.split('-'))
+//                 .every(([bookedStart, bookedEnd]) => 
+//                   bookedStart >= end || bookedEnd <= start)
+//         return {slot: `${start}-${end}`, isBooked}
+//       })
+
+// console.log(avail(ts,booked3))
     let status = "active"
     const newReservation = {
         date: req.body.date,
